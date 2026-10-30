@@ -393,6 +393,10 @@ async function processSprite(img) {
 
   try {
     const result = await trimTransparent(img);
+
+    // Record the generated URL before changing src.
+    // This prevents the MutationObserver from trimming it again.
+    img.dataset.lastSrc = result;
     img.src = result;
   } catch (e) {
     console.error("Error trimming sprite:", e);
