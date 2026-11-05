@@ -1,7 +1,5 @@
 
 
-
-
 function closePkmnEditor(){
 
     //setPkmnTeam()
@@ -15,11 +13,7 @@ function closePkmnEditor(){
     }, 150);
 
 
-
-
 }
-
-
 
 function closeTooltip() {
 
@@ -69,8 +63,6 @@ document.addEventListener("keydown", (e) => {
 });
 
 
-
-
 let moveSlotReplace = undefined 
 
 let tooltipStack = [];
@@ -81,8 +73,6 @@ function tooltipData(category, ttdata){
     tooltipStack.push({ category, ttdata });
 
     if (category == "area") {
-
-
 
         document.getElementById("tooltipTop").style.display = "none";
         document.getElementById("tooltipTitle").style.display = "none";
@@ -104,8 +94,6 @@ function tooltipData(category, ttdata){
         if (listName === "rare") { tag = `<span>Rare!</span>`; }
 
         if (pkmn[item.id].shiny && areas[ttdata].uncatchable!=true && areas[ttdata].type != "dungeon") tag += `<div class="wild-shiny-tag">✦</div>`
-
-
 
         div.className = "area-preview";
         if (pkmn[item.id].caught===0 && areas[ttdata].type !== "dungeon" && areas[ttdata].uncatchable!=true) div.classList.add('hidden-pkmn')
@@ -136,6 +124,9 @@ function tooltipData(category, ttdata){
         if (listName === "rare") { tag = `<span>Rare!</span>`; }
         if (listName === "uncommon") { tag = `<span>Uncommon</span>`; }
         div.className = "area-preview";
+        const visualTier = getItemVisualTier(item.id)
+        div.classList.add(`item-level-${visualTier.tier}`)
+        div.dataset.itemLevel = visualTier.tier
         if (item.type!=="tm") div.innerHTML = `<img style="scale:2" src="img/items/${item.id}.png">` + tag;
         if (item.type=="tm") div.innerHTML = `<img style="scale:2" src="img/items/tm${format(move[item.move].type)}.png">` + tag;
         document.getElementById("area-preview-items").appendChild(div);
@@ -143,22 +134,12 @@ function tooltipData(category, ttdata){
 
         }
 
-
-
-
-
-
-
         
         if (ttdata == areas.wildlifePark.id) {
             document.getElementById("tooltipBottom").innerHTML += `Pokemon in the Wildlife Park rotate every 12 hours`
         }
-        
-
 
         openTooltip()
-
-
 
 
     }
@@ -250,8 +231,6 @@ function tooltipData(category, ttdata){
             });
         }
 
-
-
         if (areas[ttdata].fieldEffect && areas[ttdata].type != "frontier") { 
             document.getElementById("preview-field-effects").innerHTML = `Field Effects`
             document.getElementById("preview-field-effects").className = "preview-field-list"
@@ -270,8 +249,6 @@ function tooltipData(category, ttdata){
         }
 
         
-        
-
 
         openTooltip()
 
@@ -330,16 +307,10 @@ function tooltipData(category, ttdata){
         openTooltip()
     }
 
-
-
-
-
     if (category == "seasonPreview") {
 
 
         if (saved.currentSeason == undefined) return
-
-
 
 
     document.getElementById("tooltipTop").style.display = `none`
@@ -348,8 +319,6 @@ function tooltipData(category, ttdata){
     document.getElementById("tooltipMid").innerHTML = `<div id="season-list" style="display:flex; justify-content:center;align-items:center;flex-direction:column; gap:0.5rem"></div>`
 
     openTooltip()
-
-
 
     for (const i in areas) { //regular areas
         if (areas[i].season !== saved.currentSeason) continue;
@@ -393,10 +362,6 @@ function tooltipData(category, ttdata){
         })
     }
 
-
-
-
-
     for (const i in areas) { //boss area
 
     if (areas[i].season !== saved.currentSeason) continue;
@@ -431,8 +396,6 @@ function tooltipData(category, ttdata){
         </div>
     `;
 
-
-
     document.getElementById("season-list").appendChild(div);
 
 
@@ -454,42 +417,10 @@ function tooltipData(category, ttdata){
     }
 
 
-
-
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
-
-
 
     if (category == "arenaPreview") {
 
@@ -502,8 +433,6 @@ function tooltipData(category, ttdata){
         openTooltip()
         return
     }
-
-
 
 
     document.getElementById("tooltipTop").style.display = `none`
@@ -560,8 +489,6 @@ function tooltipData(category, ttdata){
     
     `
 
-
-
     for (const i of saved.arenaCard1) {
         const div = document.createElement("span")
         div.style.filter = `hue-rotate(${returnFieldHue(i)}deg)`
@@ -585,18 +512,12 @@ function tooltipData(category, ttdata){
     }
 
 
-
-
     document.getElementById("tooltipBottom").innerHTML = `
 
     `
 
 
-
-
     pickArenaCard(saved.arenaActiveCard)
-
-
 
     //code for rotating trainers ahead
 const frontierArray = [];
@@ -680,35 +601,9 @@ frontierArray.sort((a, b) => a.data.tier - b.data.tier);
 
  }
 
-
-
-
-
-
-
     openTooltip()
 
-
-
-
-
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     if (category == "arenaCard") {
         document.getElementById("tooltipTop").style.display = `none`
@@ -732,8 +627,6 @@ frontierArray.sort((a, b) => a.data.tier - b.data.tier);
     openTooltip()
        
     }
-
-
 
     if (category == "fieldEffects") {
         document.getElementById("tooltipTop").style.display = `none`
@@ -773,8 +666,6 @@ frontierArray.sort((a, b) => a.data.tier - b.data.tier);
     openTooltip()
        
     }
-
-
 
 
     if (category == "help") {
@@ -864,8 +755,6 @@ frontierArray.sort((a, b) => a.data.tier - b.data.tier);
     }
 
 
-
-
     if (category== "ability") {
         document.getElementById("tooltipTop").style.display = `none`
         document.getElementById("tooltipTitle").innerHTML = format(ttdata)
@@ -933,8 +822,6 @@ frontierArray.sort((a, b) => a.data.tier - b.data.tier);
 
         if (document.getElementById("pkmn-editor").style.display == "flex" && pkmn[currentEditedPkmn].signature?.id == ttdata ) document.getElementById("tooltipBottom").innerHTML += `<br><br>This is a Signature Move. Signature moves will automatically be learnt at level 100`
         if (document.getElementById("pkmn-editor").style.display == "flex" && pkmn[currentEditedPkmn].eggMove?.id == ttdata ) document.getElementById("tooltipBottom").innerHTML += `<br><br>This is an Egg Move. Egg moves can be learnt with genetics when using this Pokemon as a host, using a sample that knows said egg move (usually in the form of Signature moves), at regular move transfer odds`
-
-
 
         openTooltip()
 
@@ -1037,17 +924,13 @@ frontierArray.sort((a, b) => a.data.tier - b.data.tier);
                         ${returnDivisionLetter(returnPkmnDivision(pkmn[ttdata]))}</div>
 
 
-                        
-
             <div style="box-shadow: none; outline:none; cursor:default">
                         Caught: ${pkmn[ttdata].caught}
                 </div>
 
                 </div>
 
-                
 
-                
                 
             
         `
@@ -1069,8 +952,6 @@ frontierArray.sort((a, b) => a.data.tier - b.data.tier);
 
         }
         
-        
-
 
         openTooltip()
 
@@ -1080,14 +961,10 @@ frontierArray.sort((a, b) => a.data.tier - b.data.tier);
     if (category == "pkmnEditor") {
 
 
-
-
         const poke = pkmn[ttdata]
 
         voidAnimation("pkmn-editor","tooltipBoxAppear 0.2s 1")
         document.getElementById("pkmn-editor").style.display = "flex"
-
-
 
         if (poke.signature!==undefined && poke.level == 100 && !poke.movepool.includes(poke.signature.id)) poke.movepool.push(poke.signature.id)
 
@@ -1104,8 +981,6 @@ frontierArray.sort((a, b) => a.data.tier - b.data.tier);
         <svg id="pkmn-edit-dictionary" onclick="tooltipData('dictionaryPkmn', currentEditedPkmn)" <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="m6.006 11.823l1.123-3.06h.05l1.123 3.06zm6.494 5.496q1.216-.678 2.453-.98t2.547-.3q.9 0 1.618.111t1.267.296q.23.096.423-.029t.192-.394V7.008q0-.173-.096-.308q-.096-.134-.327-.23q-.825-.293-1.501-.4T17.5 5.961q-1.31 0-2.613.386q-1.304.387-2.387 1.16zm-6.78-4.763h2.869l.474 1.306q.05.111.137.17t.204.059q.198 0 .303-.158t.043-.35L7.739 8.24q-.05-.131-.169-.212t-.255-.081h-.323q-.136 0-.254.08t-.169.213l-2.011 5.361q-.062.173.043.33t.303.159q.117 0 .206-.06q.09-.058.14-.175zm6.28 5.9q-.235 0-.432-.059t-.376-.15q-1.09-.595-2.27-.902T6.5 17.04q-.78 0-1.534.13q-.753.131-1.466.42q-.544.217-1.022-.131T2 16.496V6.831q0-.371.195-.689t.547-.442q.887-.383 1.836-.56T6.5 4.962q1.47 0 2.866.423q1.398.423 2.634 1.23q1.237-.807 2.634-1.23t2.866-.423q.973 0 1.922.178q.95.177 1.836.56q.352.125.547.442t.195.689v9.665q0 .614-.516.943q-.517.328-1.1.111q-.693-.27-1.418-.39q-.724-.121-1.466-.121q-1.24 0-2.421.306t-2.271.901q-.18.093-.376.151q-.197.059-.432.059m1.885-9.508q0-.11.076-.222t.18-.168q.763-.346 1.613-.53q.85-.182 1.746-.182q.48 0 .91.053t.886.153q.129.03.224.135q.096.104.096.257q0 .252-.15.366t-.402.052q-.37-.075-.757-.103q-.388-.028-.807-.028q-.804 0-1.573.154q-.77.154-1.46.43q-.257.099-.42-.005t-.162-.362m0 5.423q0-.11.076-.231q.076-.123.18-.178q.725-.346 1.613-.52q.888-.173 1.746-.173q.48 0 .91.053t.886.153q.129.03.224.135q.096.104.096.257q0 .252-.15.366t-.402.052q-.37-.075-.757-.103q-.388-.028-.807-.028q-.784 0-1.544.16q-.76.161-1.45.457q-.258.118-.44-.003t-.181-.397m0-2.692q0-.11.076-.222t.18-.168q.763-.347 1.613-.53q.85-.182 1.746-.182q.48 0 .91.053t.886.153q.129.03.224.134q.096.104.096.258q0 .252-.15.366t-.402.051q-.37-.075-.757-.102q-.388-.028-.807-.028q-.804 0-1.573.154q-.77.153-1.46.43q-.257.098-.42-.005q-.162-.105-.162-.362"/></svg>
         <svg onclick="renamePokemon()" style="padding:7px" <svg  xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="m15.287 3.152l-.927.927l-8.521 8.52c-.577.578-.866.867-1.114 1.185a6.6 6.6 0 0 0-.749 1.211c-.173.364-.302.752-.56 1.526l-1.094 3.281l-.268.802a1.06 1.06 0 0 0 1.342 1.342l.802-.268l3.281-1.094c.775-.258 1.162-.387 1.526-.56q.647-.308 1.211-.749c.318-.248.607-.537 1.184-1.114l8.521-8.521l.927-.927a3.932 3.932 0 0 0-5.561-5.561Z"/><path d="M14.36 4.078s.116 1.97 1.854 3.708s3.707 1.853 3.707 1.853M4.198 21.678l-1.876-1.876" opacity="0.5"/></g></svg>`
 
-
-        
     if (pkmn[currentEditedPkmn].tag) document.getElementById("explore-pkmn-tag").value = pkmn[currentEditedPkmn].tag;
     else document.getElementById("explore-pkmn-tag").value = "none";
 
@@ -1116,10 +991,6 @@ frontierArray.sort((a, b) => a.data.tier - b.data.tier);
     
     if (pkmn[poke.id].starsign) document.getElementById("pkmn-editor-sprite").style.filter = `hue-rotate(${starsign[pkmn[poke.id].starsign].hue}deg)`
     else document.getElementById("pkmn-editor-sprite").style.filter = `hue-rotate(0deg)`
-
-
-
-
 
 
         let nameTag =""
@@ -1134,8 +1005,6 @@ frontierArray.sort((a, b) => a.data.tier - b.data.tier);
 
 
         if ( pkmn[currentEditedPkmn].nickname) document.getElementById("pkmn-editor-nickname").textContent = pkmn[currentEditedPkmn].nickname
-
-
 
 
         if (pkmn[currentEditedPkmn].decor) {
@@ -1306,8 +1175,6 @@ frontierArray.sort((a, b) => a.data.tier - b.data.tier);
         if (poke.type.includes(`fire`)) document.getElementById(`pkmn-editor-side-content`).style.backgroundImage = `url(img/bg/mini/volcano.png)`
         if (poke.type.includes(`psychic`)) document.getElementById(`pkmn-editor-side-content`).style.backgroundImage = `url(img/bg/mini/space.png)`
 
-
-
     
     if (pkmn[ttdata].ability == undefined) pkmn[ttdata].ability = learnPkmnAbility(pkmn[ttdata].id)    
     
@@ -1438,8 +1305,6 @@ frontierArray.sort((a, b) => a.data.tier - b.data.tier);
     }
 
 
-
-
     })
 
 
@@ -1448,8 +1313,6 @@ frontierArray.sort((a, b) => a.data.tier - b.data.tier);
     if (moveId == pkmn[ttdata].signature?.id) signatureIcon = `<svg style="color:${returnTypeColor(move[moveId].type)}" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M21.951 9.67a1 1 0 0 0-.807-.68l-5.699-.828l-2.548-5.164A.98.98 0 0 0 12 2.486v16.28l5.097 2.679a1 1 0 0 0 1.451-1.054l-.973-5.676l4.123-4.02a1 1 0 0 0 .253-1.025" opacity="0.5"/><path fill="currentColor" d="M11.103 2.998L8.555 8.162l-5.699.828a1 1 0 0 0-.554 1.706l4.123 4.019l-.973 5.676a1 1 0 0 0 1.45 1.054L12 18.765V2.503a1.03 1.03 0 0 0-.897.495"/></svg>`
 
     if (move[moveId].restricted) signatureIcon += `<svg style="color:${returnTypeColor(move[moveId].type)}" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M12.832 21.801c3.126-.626 7.168-2.875 7.168-8.69c0-5.291-3.873-8.815-6.658-10.434c-.619-.36-1.342.113-1.342.828v1.828c0 1.442-.606 4.074-2.29 5.169c-.86.559-1.79-.278-1.894-1.298l-.086-.838c-.1-.974-1.092-1.565-1.87-.971C4.461 8.46 3 10.33 3 13.11C3 20.221 8.289 22 10.933 22q.232 0 .484-.015c.446-.056 0 .099 1.415-.185" opacity="0.5"/><path fill="currentColor" d="M8 18.444c0 2.62 2.111 3.43 3.417 3.542c.446-.056 0 .099 1.415-.185C13.871 21.434 15 20.492 15 18.444c0-1.297-.819-2.098-1.46-2.473c-.196-.115-.424.03-.441.256c-.056.718-.746 1.29-1.215.744c-.415-.482-.59-1.187-.59-1.638v-.59c0-.354-.357-.59-.663-.408C9.495 15.008 8 16.395 8 18.445"/></svg>`
-
-
 
     divMove.innerHTML = 
     `<div
@@ -1493,8 +1356,6 @@ const sortedMovepool = movepool
     if (pkmn[ttdata].moves.slot4 == undefined && pkmn[ttdata].moves.slot1!= e && pkmn[ttdata].moves.slot2!= e && pkmn[ttdata].moves.slot3!= e && pkmn[ttdata].moves.slot4!= e) pkmn[ttdata].moves.slot4 = e
 
 
-
-
     const divMove = document.createElement("div") 
     divMove.className = "pkmn-movebox"
     divMove.style.borderColor = returnTypeColor(move[ moveId ].type)
@@ -1510,8 +1371,6 @@ const sortedMovepool = movepool
     
 
     if (moveSlotReplace === undefined) return
-    
-
 
     if (movesArray.includes(moveId)) {
     return;
@@ -1575,8 +1434,6 @@ const sortedMovepool = movepool
 
     if (move[moveId].restricted) signatureIcon += `<svg style="color:${returnTypeColor(move[moveId].type)}" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M12.832 21.801c3.126-.626 7.168-2.875 7.168-8.69c0-5.291-3.873-8.815-6.658-10.434c-.619-.36-1.342.113-1.342.828v1.828c0 1.442-.606 4.074-2.29 5.169c-.86.559-1.79-.278-1.894-1.298l-.086-.838c-.1-.974-1.092-1.565-1.87-.971C4.461 8.46 3 10.33 3 13.11C3 20.221 8.289 22 10.933 22q.232 0 .484-.015c.446-.056 0 .099 1.415-.185" opacity="0.5"/><path fill="currentColor" d="M8 18.444c0 2.62 2.111 3.43 3.417 3.542c.446-.056 0 .099 1.415-.185C13.871 21.434 15 20.492 15 18.444c0-1.297-.819-2.098-1.46-2.473c-.196-.115-.424.03-.441.256c-.056.718-.746 1.29-1.215.744c-.415-.482-.59-1.187-.59-1.638v-.59c0-.354-.357-.59-.663-.408C9.495 15.008 8 16.395 8 18.445"/></svg>`
 
-
-
     divMove.innerHTML = 
     `<div
     class="pkmn-movebox-progress" style="background: ${returnTypeColor(move[ moveId ].type)} "></div><span>`
@@ -1593,13 +1450,7 @@ const sortedMovepool = movepool
     updateMovepool()
 
 
-
-
     }
-
-
-
-
 
 
     if (category == "dictionaryAbility") {
@@ -1650,11 +1501,7 @@ const sortedMovepool = movepool
 
     }
 
-
-
    if (category == "dictionaryMove") {
-
-
 
         document.getElementById("tooltipTop").style.display = `inline`
         document.getElementById("tooltipTitle").style.display = `inline`
@@ -1698,8 +1545,6 @@ const sortedMovepool = movepool
             if (pkmn[e].signature?.id == ttdata) signatureArray.push(e)
         }
 
-
-
         document.getElementById("tooltipBottom").innerHTML = `
         This move can only appear as the Signature Move of ${joinWithAnd(signatureArray)}
         `
@@ -1717,8 +1562,6 @@ const sortedMovepool = movepool
 
     }
 
-
-
     if (category == "dictionaryPkmn") {
 
         document.getElementById("tooltipTop").style.display = `inline`
@@ -1728,8 +1571,6 @@ const sortedMovepool = movepool
         //if (pkmn[ttdata].caught == 0) document.getElementById("tooltipTop").innerHTML = `<div><img style="filter:brightness(0)" src="img/pkmn/sprite/${ttdata}.png"></div>`
         document.getElementById("tooltipTitle").innerHTML = format(ttdata)
         document.getElementById("tooltipMid").style.display = "inline"
-
-
 
         let wildSpawn = ""
         let eventSpawn = ""
@@ -1741,8 +1582,6 @@ const sortedMovepool = movepool
                     wildSpawn = areas[i].id
                 }
             }
-
-
 
             if (areas[i].type=="event" && areas[i].uncatchable != true){
                 if (areas[i].spawns?.common?.includes(pkmn[ttdata]) || areas[i].spawns?.uncommon?.includes(pkmn[ttdata]) || areas[i].spawns?.rare?.includes(pkmn[ttdata])){
@@ -1758,12 +1597,6 @@ const sortedMovepool = movepool
 
 
         let parkSpawn = ""
-
-
-        
-
-
-
 
         let spawnLocation = ""
         if (wildSpawn != "") spawnLocation += `<span>Found in the wild area ${format(wildSpawn)} (Rotation ${areas[wildSpawn].rotation})</span>`
@@ -1799,16 +1632,10 @@ const sortedMovepool = movepool
 
         openTooltip()
 
-
-
     }
 
 
-
-
     if (category == "dictionaryItem") {
-
-
 
         document.getElementById("tooltipTop").style.display = `inline`
         document.getElementById("tooltipTitle").style.display = `inline`
@@ -1820,13 +1647,7 @@ const sortedMovepool = movepool
         else if (item[ttdata].type == "decor") document.getElementById("tooltipTop").innerHTML = `<img src="img/decor/${ttdata}.png" style="scale:2">`
         else  document.getElementById("tooltipTop").innerHTML = `<img src="img/items/${ttdata}.png">`
 
-
-
-
-
         document.getElementById("tooltipMid").innerHTML = `${item[ttdata].info()}<br>(You have ${item[ttdata].got})`
-
-
 
 
         let obtainText = ""
@@ -1871,12 +1692,8 @@ const sortedMovepool = movepool
         if (item[ttdata].type=="decor" && item[ttdata].rarity) obtainText += `<span>Can be bought in the Poke-Mart</span>`
 
 
-
-
         if (obtainText=="") obtainText += `<span>This item is currently unobtainable</span>`
 
-
-        
         
         document.getElementById("tooltipBottom").innerHTML = `<span style="display:flex; flex-direction:column">${obtainText}<span>`
 
@@ -1889,11 +1706,7 @@ const sortedMovepool = movepool
     }
 
 
-
-
 }
-
-
 
 document.addEventListener("contextmenu", e => {
 

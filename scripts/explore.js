@@ -117,10 +117,6 @@ function mulberry32(a) {
   };
 }
 
-
-
-
-
 function givePkmn(poke, level) {
     const finalLevel = level ?? 1;
 
@@ -158,13 +154,9 @@ function givePkmn(poke, level) {
 
     poke.level = finalLevel;
 
-
-
     poke.ability = learnPkmnAbility(poke.id);
 
     if (rng(1/400)) poke.shiny = true
-
-
 
     updatePokedex();
 }
@@ -205,18 +197,6 @@ function setWildPkmn(){
     let randomMoves = [];
 
 
-
-
-
-
-
-
-
-
-
-
-
-
     if (saved.currentArea == areas.training.id) {
 
     document.getElementById(`training-indicator`).style.display = `flex`
@@ -240,8 +220,6 @@ function setWildPkmn(){
     //attempts a safe approach
     spawnedPkmn = randomDivisionPkmn(areaDivision, typeWeak(pkmn[saved.trainingPokemon].type[0],pkmn[saved.trainingPokemon].type[1],1), undefined, undefined, "training")
     if (pkmn[saved.trainingPokemon].type[1] != undefined && rng(0.5)) spawnedPkmn = randomDivisionPkmn(areaDivision, typeWeak(pkmn[saved.trainingPokemon].type[0],pkmn[saved.trainingPokemon].type[1],2), undefined, undefined, "training")
-
-
 
     //if it cant, safe of a higher division
     if (!pkmn[spawnedPkmn]) {
@@ -278,8 +256,6 @@ function setWildPkmn(){
     if (areas.training.tier==2) wildLevel = pkmn[saved.trainingPokemon].level+10
     if (areas.training.tier==3) wildLevel = pkmn[saved.trainingPokemon].level+20
 
-
-
     const thresholds = [0, 10, 20, 30];
     for (let t of thresholds) {
         if (100 > t) {
@@ -293,13 +269,7 @@ function setWildPkmn(){
     }
 
 
-
-
-
-
     if (currentTrainingWave<=0) {  training[areas.training.currentTraining].effect(); leaveCombat(); setTrainingMenu(); return }
-
-
 
 
     } else if (saved.currentArea == areas.frontierSpiralingTower.id) {
@@ -394,8 +364,6 @@ for (let i = 0; i < 4; i++) {
 
                 if (item.battlePass.got>0) {item.goldenBottleCap.got+=3; item.goldenBottleCap.newItem +=3; }
 
-
-
             }
 
             
@@ -417,8 +385,6 @@ for (let i = 0; i < 4; i++) {
             } 
             }
             }
-
-            
 
 
             if (areas[saved.currentArea].itemReward) { //new function
@@ -452,8 +418,6 @@ for (let i = 0; i < 4; i++) {
             }
 
 
-
-
             //apricorn code
             if (areas[saved.currentArea].type == "event" && (areas[saved.currentArea].difficulty == tier3difficulty || areas[saved.currentArea].difficulty == tier4difficulty)){
             let itemToAdd = ""
@@ -465,8 +429,6 @@ for (let i = 0; i < 4; i++) {
                 item[itemToAdd].newItem++
             }
             }
-
-
 
             if (areas[saved.currentArea].encounterEffect) areas[saved.currentArea].encounterEffect()
 
@@ -490,8 +452,6 @@ for (let i = 0; i < 4; i++) {
 
         wildLevel = areas[saved.currentArea].level
         hpMultiplier = 4 
-
-        
 
 
     } 
@@ -522,24 +482,14 @@ for (let t of thresholds) {
 
     } 
 
-
-
-
-
     saved.currentPkmn = spawnedPkmn
 
     if (areas[saved.currentArea].difficulty!=undefined) hpMultiplier = areas[saved.currentArea].difficulty
-
-
 
     //abilities
     if (testAbility(`active`,  ability.intimidate.id ) ) {wildBuffs.atkdown1 = 3; updateWildBuffs() }
     if (testAbility(`active`,  ability.dauntingLook.id ) ) {wildBuffs.satkdown1 = 3; updateWildBuffs() }
 
-
-
-
-    
     document.getElementById("explore-wild-name").innerHTML = format(spawnedPkmn) + ` <span class="explore-pkmn-level" > lvl ${wildLevel} </span>`
     document.getElementById("explore-wild-sprite").src = `img/pkmn/sprite/${spawnedPkmn}.png`
 
@@ -561,8 +511,6 @@ for (let t of thresholds) {
 
     if (  saved.gamemodHard == true && areas[saved.currentArea].type == "vs") hpMultiplier *= 2
 
-
-
     wildPkmnHp =
     (100 + (hpStars * 30)
     * ( 1+(wildLevel * 0.2) )       
@@ -581,10 +529,6 @@ for (let t of thresholds) {
     document.getElementById("explore-wild-sprite-data").dataset.pkmn = spawnedPkmn
 
     document.getElementById("explore-header-moves-wild").innerHTML = ""
-
-
-
-
 
 // filtra undefined y los mueve al final
 randomMoves = randomMoves.filter(m => m !== undefined).concat(randomMoves.filter(m => m === undefined));
@@ -627,10 +571,6 @@ while (randomMoves.length < 4) randomMoves.push(undefined);
     }
 
 
-    
-
-
-
     voidAnimation(`explore-wild-sprite`,`wildPokemonSpawn 0.5s 1`)
     updateWildPkmn()
 
@@ -663,12 +603,6 @@ function updateItemsGot(){
 
 
     }
-
-
-
-
-
-
 
 }
 
@@ -705,10 +639,6 @@ function dropItem(){
     if (item[drop].type=="held" && item[drop].got>= 20) drop = item.bottleCap.id
     if (item[drop].type!=="held" && item[drop].evo && item[drop].got>= 10) drop = item.bottleCap.id
 
-
-
-
-
     //seasonal drops
     if (saved.currentSeason !== undefined) {
         if (rng(0.15)){
@@ -719,18 +649,6 @@ function dropItem(){
         }
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
     if (drop == undefined) return
     if (drop == "nothing") return
 
@@ -738,15 +656,7 @@ function dropItem(){
     item[drop].got ++
 
 
-
-
-
-
-
-
     updateItemsGot()
-
-
 
 }
 
@@ -760,8 +670,6 @@ function transition(){
 }
 
 saved.lastAreaJoined = undefined
-
-
 
 function exitCombat(){
 
@@ -787,21 +695,7 @@ function exitCombat(){
     saveGame()
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 }
-
-
 
 function leaveCombat(){
 
@@ -843,12 +737,6 @@ function leaveCombat(){
     updateTeamBuffs()
     updateWildBuffs()
 
-
-
-
-
-
-
     if (document.getElementById(`menu-button`).classList.contains(`menu-button-open`)) openMenu()
 
     document.getElementById("area-end").style.display = "flex"
@@ -868,18 +756,12 @@ function leaveCombat(){
 
     if (areas[saved.currentArea].trainer) {updateVS()}
 
-
-
     let noItems = true
     let noPkmn = true
 
     if (storedAfkSeconds==0) document.getElementById("area-end-item-list").innerHTML = ""
     if (storedAfkSeconds==0) document.getElementById("area-end-pkmn-list").innerHTML = "";
     document.getElementById("area-end-item-title").innerHTML = "New Items!"
-
-
-
-
 
     //spiraling tower rewards
     if (saved.currentSpiralFloor!==1 && (saved.currentSpiralFloor == saved.maxSpiralFloor)) {
@@ -990,14 +872,6 @@ function leaveCombat(){
         }
     }
 
-
-
-
-
-
-
-
-
     //new items
     for (const i in item) {
         if (i === item.mysteryEgg.id) continue
@@ -1033,8 +907,6 @@ function leaveCombat(){
     if (saved.hasTeatimeBeenUsed == true){
         rarePkmnChance += 0.01
      }
-
-
 
     if (item.mysteryEgg.got>0 && areas[saved.currentArea].spawns!=undefined) {//wild
 
@@ -1164,8 +1036,6 @@ function leaveCombat(){
     const divPkmn = document.createElement("div");
     divPkmn.dataset.pkmnEditor = i
 
-
-
     pkmn[i].caught++
     pkmn[i].newPokemon = undefined
 
@@ -1173,17 +1043,11 @@ function leaveCombat(){
     if (areas[saved.currentArea]?.encounter == true && saved.hideGotPkmn == "true" && divTag=="") continue
     noPkmn = false
 
-
-
     divPkmn.innerHTML = `<img class="sprite-trim" src="img/pkmn/sprite/${i}.png">`+divTag;
     if (divTag == `<span>✦Shiny✦!</span>`) divPkmn.innerHTML = `<img class="sprite-trim" src="img/pkmn/shiny/${i}.png">`+divTag;
     document.getElementById("area-end-pkmn-list").appendChild(divPkmn);
 
-
-
     }
-
-
 
 
     document.getElementById("area-end-moves-title").style.display = "none"
@@ -1229,8 +1093,6 @@ function leaveCombat(){
 
     //if (areas[saved.currentArea]?.trainer && areas[saved.currentArea]?.defeated) document.getElementById("area-end-item-title").innerHTML = "Rewards have been automatically added"
 
-
-
     document.getElementById("area-refight").style.display = "none"
     if ( item.autoRefightTicket.got>0 && areas[saved.currentArea].type!="vs" && areas[saved.currentArea].type!="frontier" && areas[saved.currentArea].id != "training" && areas[saved.currentArea].encounter != true ) {
         document.getElementById("area-refight").style.display = "flex"
@@ -1257,12 +1119,8 @@ function leaveCombat(){
     }
 
 
-
-
     saved.hasPayDayBeenUsed = false
     saved.hasTeatimeBeenUsed = false
-
-
 
     item.mysteryEgg.got = 0
     item.mysteryEgg.newItem = 0
@@ -1286,20 +1144,12 @@ function leaveCombat(){
 
     setWildAreas()
 
-
-        
         
     if (saved.autoRefight == true) {
         rejoinArea()
     }
 
-
-
-
-
     saveGame()
-
-
 
 
 }
@@ -1330,10 +1180,6 @@ function rejoinArea(){
     team[i].damageDealt = 0
     }
 
-
-
-
-
     if (storedAfkSeconds>30){ //if the player is auto-refighting
 
 
@@ -1359,8 +1205,6 @@ function rejoinArea(){
 
     }
 
-
-
     voidAnimation(`explore-transition`, `exploreTransition 1s 1`)
     document.getElementById(`explore-transition`).style.display = `flex`
 
@@ -1385,8 +1229,6 @@ function rejoinArea(){
     }, 500);
 
 
-
-
 }
 
 
@@ -1401,25 +1243,7 @@ function updateWildPkmn(){
 
     if (afkSeconds>0) respawnTimer = 0 //woomp woomp
 
-
-
-
-
-
-
-
-
-
-
     const percent = (wildPkmnHp / wildPkmnHpMax) * 100;
-
-
-
-
-
-
-
-
 
 const hpBars = [
   { el: document.getElementById("exploe-wild-hp"), color: null}, // dynamic
@@ -1473,8 +1297,6 @@ for (let i = activeBars - 1; i >= 0; i--) {
     } 
 
 
-
-
   }
 
   // fixed colors for hp2, hp3...
@@ -1488,24 +1310,10 @@ for (let i = activeBars; i < hpBars.length; i++) {
   hpBars[i].el.style.display = "none";
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
     if (percent <= 0) { //on wild death enemy kill
 
 
     if (afkSeconds>0) afkSeconds-- //account for the lack of timer respawn
-
-
 
 
     if (saved.currentArea == areas.training.id) {
@@ -1594,11 +1402,7 @@ for (let i = activeBars; i < hpBars.length; i++) {
 
     if (areas[saved.currentArea]?.trainer) currentTrainerSlot++
 
-
-
     setTimeout(() => {
-
-
 
         
         setWildPkmn()
@@ -1611,12 +1415,8 @@ for (let i = activeBars; i < hpBars.length; i++) {
     }, respawnTimer);
 
     
-    
-
 
     } 
-
-
 
 }
 
@@ -1630,8 +1430,6 @@ function giveRibbon(target, id){
     poke.ribbons.push(id)
 
 }
-
-
 
 
 function returnTypeColor(type) {
@@ -1676,13 +1474,9 @@ function openMenu(){
     }
 
 
-
-
     if (saved.curry && saved.curry.time>0) {
         document.getElementById(`curry-timer`).style.display = "flex"
     }     
-
-
 
     if (saved.mysteryGiftClaimed == true) document.getElementById(`menu-mystery-gift`).style.display = "none"
     const today = new Date();
@@ -1735,8 +1529,6 @@ function openMenu(){
     }
 
 
-
-
     if (saved.currentArea!==undefined){
         document.getElementById(`menu-item-vs`).style.filter = "brightness(0.6)"
         document.getElementById(`menu-item-team`).style.filter = "brightness(0.6)"
@@ -1754,8 +1546,6 @@ function openMenu(){
         document.getElementById(`menu-item-training`).style.filter = "brightness(1)"
     } else document.getElementById(`menu-item-travel`).style.filter = "brightness(1)"
 
-
-
     if (document.getElementById(`menu-button`).classList.contains(`menu-button-open`)) {
     document.getElementById(`menu-button`).classList.remove(`menu-button-open`)
     document.getElementById(`curry-timer`).style.display = "none"
@@ -1765,10 +1555,6 @@ function openMenu(){
 
 
 }
-
-
-
-
 
 function updateTeamItems(){
 
@@ -1790,11 +1576,7 @@ function updateTeamItems(){
 }
 
 
-
-
 function updateTeamExp(){
-
-
 
 
 for (const i in team) {
@@ -1808,8 +1590,6 @@ for (const i in team) {
 
 
     if (pkmn[ team[i].pkmn.id ].exp>=100){ // on level up
-
-
 
         if (pkmn[ team[i].pkmn.id ].level % 7 === 0) {//every 7 levels, learn move
 
@@ -1828,20 +1608,12 @@ for (const i in team) {
 
             }
 
-
-
-
-
         }
 
-
-        
         pkmn[ team[i].pkmn.id ].exp -= 100
         pkmn[ team[i].pkmn.id ].level++
         document.getElementById(`explore-${i}-lvl`).innerHTML = `lvl ${pkmn[ team[i].pkmn.id ].level}`
         updateTeamExp()
-
-
 
 
         if (pkmn[ team[i].pkmn.id ].evolve && pkmn[team[i].pkmn.id].evolve()[1].level>0){ // if it evolves by level up
@@ -1854,16 +1626,10 @@ for (const i in team) {
 
         }
 
-
-
     }
-
-    
 
 
 }
-
-
 
 
 }
@@ -1871,16 +1637,12 @@ for (const i in team) {
 
 function updateTeamPkmn(){
 
-
-
     for (const i in team) {
 
 
     if (team[i].pkmn === undefined) continue
 
     if (!document.getElementById(`explore-${i}-hp`)) continue
-
-
 
     const percent = (pkmn[ team[i].pkmn.id ].playerHp / pkmn[ team[i].pkmn.id ].playerHpMax) * 100;
     if (percent > 60) document.getElementById(`explore-${i}-hp`).style.background = "rgb(130, 211, 130)"
@@ -1934,8 +1696,6 @@ function updateTeamPkmn(){
 
     }
 
-
-
     }
 
 
@@ -1957,8 +1717,6 @@ function updateTeamPkmn(){
         }
    
         }
-
-
 
 }
 
@@ -1986,14 +1744,10 @@ document.addEventListener("selectstart", (e) => {
 
 */
 
-
-
 function returnPkmnTypes(id){
     if (pkmn[id].type[1] != undefined) return `<div style="background:${returnTypeColor(pkmn[id].type[0])}">${format(pkmn[id].type[0])}</div><div style="background:${returnTypeColor(pkmn[id].type[1])}">${format(pkmn[id].type[1])}</div>`
     else return `<div style="background:${returnTypeColor(pkmn[id].type[0])}">${format(pkmn[id].type[0])}</div>`
 }
-
-
 
 const nature = {
     adamant : { atk: +1, satk: -1 },
@@ -2003,8 +1757,6 @@ const nature = {
     quiet : { atk: -1, satk: -1, hp: +1 },
     bold : { def: +1, sdef: +1, hp: -1 },
 }
-
-
 
 function returnStatDotsBase(id, stat){
     const val = pkmn[id].bst[stat];
@@ -2060,8 +1812,6 @@ function returnStatDots(id, stat){
 }   
 
 
-
-
 function returnIVDots(id, stat){
     const val = Math.min(pkmn[id].ivs[stat],6);
     const max = 6;
@@ -2106,9 +1856,27 @@ function returnItemLevel(id, mod) {
     return level;
 }
 
+// Ownership is presentation state; item levels keep their existing thresholds.
+function getItemVisualTier(id) {
+    const owned = item[id].got > 0;
+    const level = returnItemLevel(id);
+    return { owned, level, tier: owned ? level : 0 };
+}
 
+function getRouteProgress(area) {
+    const spawnList = Object.values(area.spawns ?? {}).flat();
+    return {
+        allCaught: spawnList.length > 0 && spawnList.every(poke => pkmn[poke.id].caught > 0),
+        allShiny: spawnList.length > 0 && spawnList.every(poke => pkmn[poke.id].caught > 0 && pkmn[poke.id].shiny === true)
+    };
+}
 
-
+function renderRoutePokemonProgress(area) {
+    const progress = getRouteProgress(area);
+    const state = progress.allShiny ? 'is-shiny' : progress.allCaught ? 'is-complete' : 'is-incomplete';
+    const label = progress.allShiny ? 'All route Pokémon caught shiny' : progress.allCaught ? 'All route Pokémon caught' : 'Route Pokémon incomplete';
+    return `<span class="route-progress-ball ${state}" role="img" aria-label="${label}" title="${label}"></span>`;
+}
 
 
 function shouldCombatStop(){
@@ -2125,26 +1893,6 @@ function shouldCombatStop(){
     return false
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /*function gameLoop(now) {
     let delta = now - lastDeltaTime;
@@ -2164,14 +1912,10 @@ function shouldCombatStop(){
     requestAnimationFrame(gameLoop);
 }*/
 
-
-
 const STEP = 1000 / 60; 
 let lastDeltaTime = performance.now();
 let accumulator = 0;
 const MAX_STEPS_PER_FRAME = 5000; 
-
-
 
 function gameLoop(now) {
     let delta = now - lastDeltaTime;
@@ -2199,8 +1943,6 @@ function gameLoop(now) {
             updateRaidTimer();
         }
 
-
-
         // use logic time
         if (afkSeconds > 0) {
         if (shouldCombatStop()==false) afkSeconds -= STEP / 1000;
@@ -2218,43 +1960,7 @@ function gameLoop(now) {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 const statusBuffs = ['burn', 'freeze', 'confused', 'paralysis', 'poisoned', 'sleep', 'embargo'];
-
-
 
 let exploreActiveMember = 'slot1'
 let exploreCombatPlayerTurn = 1
@@ -2300,8 +2006,6 @@ function exploreCombatPlayer() {
     }
 
 
-
-
     //override battle timer (debug)
     if (saved.overrideBattleTimer != defaultPlayerMoveTimer && moveTimerPlayer != saved.overrideBattleTimer) moveTimerPlayer = saved.overrideBattleTimer
     
@@ -2317,8 +2021,6 @@ function exploreCombatPlayer() {
     if (testAbility(`active`, ability.galeWings.id) && testAbility(`active`, ability.chrysilate.id) && move[nextMovePlayer].type == "normal" ) moveTimerPlayer /= 1.5
     if (testAbility(`active`, ability.neuroforce.id) && testAbility(`active`, ability.espilate.id) && move[nextMovePlayer].type == "normal" ) moveTimerPlayer /= 1.5
     if (testAbility(`active`, ability.neuroforce.id) && testAbility(`active`, ability.pixilate.id) && move[nextMovePlayer].type == "normal" ) moveTimerPlayer /= 1.5
-
-
 
 
     if (testAbility(`active`, ability.cacophony.id) == true && move[nextMovePlayer].affectedBy?.includes(ability.cacophony.id) ) moveTimerPlayer /= 2
@@ -2349,15 +2051,7 @@ function exploreCombatPlayer() {
     if (team[exploreActiveMember].buffs?.speup2 > 0) moveTimerPlayer /= 1.75
 
 
-
-
     if (afkSeconds <= 0 && lastCrossStab!=undefined && lastCrossStab!=move[nextMovePlayer].type && /*pkmn[team[exploreActiveMember].pkmn.id].type.includes(move[nextMovePlayer].type) &&*/ move[nextMovePlayer].power>0 && barPlayer.style.backgroundImage != crossPattern && ( !testAbility(`active`, "ate") ||  move[nextMovePlayer].type!=="normal" ) ) barPlayer.style.backgroundImage = crossPattern
-
-
-
-
-
-
 
 
     /*if (afkSeconds > 0) { //afk time
@@ -2411,18 +2105,12 @@ function exploreCombatPlayer() {
         
         team[exploreActiveMember].turn++;
 
-
-
         barPlayer.style.width = `0%`;
 
         //on move execution
         let totalPower = 0
         const attacker = pkmn[ team[exploreActiveMember].pkmn.id ]
         const defender = pkmn[ saved.currentPkmn ]
-
-
-        
-
 
         let nextMove = move[nextMovePlayer]
         if (nextMove.id == move.sketch.id) nextMove =  move[ attacker.moves.slot1  ]
@@ -2449,8 +2137,6 @@ function exploreCombatPlayer() {
         if (nextMove.powerMod) movePower *= nextMove.powerMod()
 
 
-
-
         //abilities
         if (testAbility(`active`, ability.technician.id) && movePower<=60 ) movePower *= 1.5
 
@@ -2464,12 +2150,6 @@ function exploreCombatPlayer() {
 
         if (testAbility(`active`, ability.reckless.id) && nextMove.timer>defaultPlayerMoveTimer ) movePower *= 1.5
         if (testAbility(`active`, ability.libero.id) && nextMove.timer<defaultPlayerMoveTimer ) movePower *= 2
-
-
-
-
-
-
 
 
         let multihit = 1
@@ -2488,14 +2168,6 @@ function exploreCombatPlayer() {
 
         if (team[exploreActiveMember].item == item.assaultVest.id && nextMove.power==0) nextMove = move.splash
 
-
-
-
-
-
-
-
-        
 
         if (nextMove.split == 'physical') {
 
@@ -2576,8 +2248,6 @@ function exploreCombatPlayer() {
 
          }
 
-
-
         }
 
         if (nextMove.split == 'physical') {
@@ -2596,8 +2266,6 @@ function exploreCombatPlayer() {
 
             if (wildBuffs.defdown1 > 0) totalPower *=1.5
             if (wildBuffs.defdown2 > 0) totalPower *=2
-
-
 
          }
 
@@ -2622,8 +2290,6 @@ function exploreCombatPlayer() {
         if (testAbility(`active`, ability.dragonMaw.id) && moveType=="normal") {moveType = "dragon"; totalPower*=1.3}
         if (testAbility(`active`, ability.verdify.id) && moveType=="normal") {moveType = "grass"; totalPower*=1.3}
 
-
-
         if (testAbility(`active`, ability.protean.id)) pkmn[team[exploreActiveMember].pkmn.id].type = [moveType]
 
 
@@ -2634,8 +2300,6 @@ function exploreCombatPlayer() {
 
         if (attacker.type.includes(moveType)) totalPower *=stabBonus
         if (!attacker.type.includes(moveType) && team[exploreActiveMember].item?.split('Gem')[0] === moveType ) totalPower *=stabBonus //type gems
-
-
 
         if (areas[saved.currentArea].fieldEffect?.includes(field.wonderWard.id) && typeEffectiveness(moveType, pkmn[saved.currentPkmn].type) <= 1) totalPower *= 0.2
 
@@ -2659,8 +2323,6 @@ function exploreCombatPlayer() {
         } 
 
         if ( nextMove.id == move.freezeDry.id && pkmn[saved.currentPkmn].type.includes("water") ) typeMultiplier *= 1.5
-
-
 
         totalPower *= typeMultiplier
 
@@ -2720,8 +2382,6 @@ function exploreCombatPlayer() {
         if (team[exploreActiveMember].item == item.laggingTail.id && nextMove.affectedBy?.includes(ability.reckless.id)) totalPower *= item.laggingTail.power()
 
         if (team[exploreActiveMember].item?.endsWith('Gem')) totalPower *= item[team[exploreActiveMember].item].power()
-
-
 
 
         //held items w specific damage bonus
@@ -2795,22 +2455,14 @@ function exploreCombatPlayer() {
         if (testAbility(`active`, ability.parentalBond.id)) totalPower *= 1.5
 
 
-
-
         let zTotalPower = 0
         for (const member in team) {
             if (team[member].pkmn==undefined) continue
             if (testAbility(member, ability.soulAsterism.id) && moveType == 'ghost') totalPower *= 1.1
 
 
-
-
-
-
             if (team[member].item && item[team[member].item].zType) {
                 zCrystalTurn++
-
-
 
 
             //z move executed
@@ -2923,8 +2575,6 @@ function exploreCombatPlayer() {
 
         if (saved.weatherTimer>0 && saved.weather=="trickRoom") totalPower *= Math.pow(1.07,7 - pkmn[team[exploreActiveMember].pkmn.id].bst.spe)
 
-
-
         if (saved.weatherTimer>0){
         if (testAbility("active", ability.chlorophyll.id)  && saved.weather == "sunny") {moveBuff("wild",'speup1',"self")}
         if (testAbility("active", ability.slushRush.id ) && saved.weather == "hail") {moveBuff("wild",'speup1',"self")}
@@ -2956,10 +2606,6 @@ function exploreCombatPlayer() {
 
         if (attacker.shiny==true) totalPower *= 1.15
 
-
-
-
-
         //fieldEffects
         if (areas[saved.currentArea].fieldEffect?.includes(field.serendipity.id) && nextMove.hitEffect) {nextMove.hitEffect("wild")}
 
@@ -2979,12 +2625,6 @@ function exploreCombatPlayer() {
         if (areas[saved.currentArea].fieldEffect?.includes(field.fatiguingCurse.id) && nextMove.split == 'special') totalPower *= 0.5
 
 
-
-
-
-
-
-
         if (team[exploreActiveMember].damageDealt==undefined||team[exploreActiveMember].damageDealt==NaN) team[exploreActiveMember].damageDealt = 0
         team[exploreActiveMember].damageDealt += Math.min(totalPower, wildPkmnHp)
 
@@ -3000,8 +2640,6 @@ function exploreCombatPlayer() {
 
             battleFactoryScore += Math.ceil(  (totalPower*divisionMult)  /100)
 
-
-
             if (battleFactoryScore>saved.maxFactoryScore) {
             saved.maxFactoryScore = battleFactoryScore
             document.getElementById(`factory-highest-score`).innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M5.25 4.593v8.903q.162-.053.34-.108c.761-.231 1.788-.488 2.66-.488c1.418 0 2.74.432 3.934.821l.049.016c1.245.406 2.358.763 3.517.763c.936 0 2.256-.36 3-.593V5.073c-.806.232-2.015.527-3 .527c-1.418 0-2.74-.432-3.934-.821l-.049-.016C10.522 4.357 9.41 4 8.25 4c-.652 0-1.51.178-2.248.375c-.287.076-.545.153-.752.218m0 10.488c.21-.075.479-.167.777-.258c.737-.224 1.586-.423 2.223-.423c1.16 0 2.272.357 3.517.763l.049.016c1.193.39 2.516.821 3.934.821c1.289 0 2.977-.507 3.648-.725c.522-.168.852-.653.852-1.177V4.759c0-.87-.85-1.448-1.642-1.208c-.781.237-1.99.549-2.858.549c-1.16 0-2.272-.357-3.517-.763l-.049-.016C10.991 2.931 9.668 2.5 8.25 2.5c-.858 0-1.874.222-2.635.425a21 21 0 0 0-1.337.408l-.021.008l-.006.002h-.002l.251.707l-.252-.706a.75.75 0 0 0-.498.706v16.7a.75.75 0 0 0 1.5 0z" clip-rule="evenodd"/><path fill="currentColor" d="M4.5 4.05s2.24-.8 3.75-.8c2.597 0 4.903 1.6 7.5 1.6c.99 0 2.295-.344 3.075-.581c.331-.1.675.145.675.49v9.339c0 .21-.132.399-.333.464c-.68.22-2.262.688-3.417.688c-2.597 0-4.903-1.6-7.5-1.6c-1.51 0-3.75.912-3.75.912z" opacity="0.5"/></svg>Highest Score: ${saved.maxFactoryScore}</div>`
@@ -3009,11 +2647,7 @@ function exploreCombatPlayer() {
             document.getElementById(`factory-current-score`).innerHTML = `Score: ${battleFactoryScore}`
         }
 
-
-
         wildPkmnHp -= totalPower;
-
-
 
 
         if ( testAbility(`active`,  ability.magicGuard.id ) == false ){
@@ -3021,8 +2655,6 @@ function exploreCombatPlayer() {
 
         let dotDamage = 50
         if (areas[saved.currentArea]?.trainer || saved.currentArea == areas.frontierSpiralingTower.id) dotDamage = 12
-
-
 
         if (areas[saved.currentArea].id != areas.training.id) {
 
@@ -3038,14 +2670,10 @@ function exploreCombatPlayer() {
 
         if (team[exploreActiveMember].item == item.lifeOrb.id) {attacker.playerHp -=  attacker.playerHpMax/12;}
 
-
-
                 
         for (const i in team[exploreActiveMember].buffs){
             if (team[exploreActiveMember].buffs[i]>0) team[exploreActiveMember].buffs[i] -= 1
         }
-
-
 
         if (testAbility(`active`, ability.moody.id)) {
         let picked = arrayPick(["atkup2","satkup2","defup2","sdefup2","speup2"],2)
@@ -3087,8 +2715,6 @@ function exploreCombatPlayer() {
         }
 
 
-
-
         updateTeamBuffs()
         updateWildBuffs()
         updateWildPkmn();
@@ -3107,8 +2733,6 @@ function exploreCombatPlayer() {
         if (areas[saved.currentArea]?.trainer || areas[saved.currentArea]?.type == "frontier") fatigueDamage = 0
         if (saved.currentArea == areas.training.id) fatigueDamage = 0
 
-
-
         if (saved.currentArea == areas.frontierBattleFactory.id) fatigueDamage = attacker.playerHpMax/15
         attacker.playerHp -= fatigueDamage
         updateTeamPkmn()
@@ -3118,8 +2742,6 @@ function exploreCombatPlayer() {
         if (team[exploreActiveMember].item == item.ejectButton.id) {team[exploreActiveMember].turn=1; switchMemberNext(); return}
         if (team[exploreActiveMember].item == item.ejectPack.id) {team[exploreActiveMember].turn=1; switchMemberNext(-1); return}
         }
-
-
 
     }
 
@@ -3152,8 +2774,6 @@ function typeEffectiveness(attacking, defending) {
 
   let result = defending.reduce((mul, defType) => mul * (chart[attacking]?.[defType] ?? 1), 1);
 
-
-
   const noImmunities =
     saved.currentArea == areas.frontierSpiralingTower.id ||
     saved.currentArea == areas.training.id;
@@ -3185,8 +2805,6 @@ function typeEffectiveness(attacking, defending) {
 
   return result
 }
-
-
 
 function typeWeak(myType1, myType2 = null, ranking = 1) { //ts was made by gpt ask him about it 
   const allTypes = [
@@ -3286,8 +2904,6 @@ function returnTypeMultipliers(pkmn) {
     }).join('');
 }
 
-
-
 /*function exploreCombatWild() { //deprecated
 
     //if (saved.currentArea == undefined) return
@@ -3357,18 +2973,6 @@ function returnTypeMultipliers(pkmn) {
             afkSeconds -= simulate / 60;
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
         //barProgress += 100 / (moveTimer / (1000 / 60) );
         barProgress += 100 / ((moveTimer * Math.pow(0.9, pkmn[saved.currentPkmn].bst.spe)) / (1000 / 60));
 
@@ -3394,8 +2998,6 @@ function returnTypeMultipliers(pkmn) {
             bar.style.width = "0%";
 
             voidAnimation(`pkmn-movebox-wild-${exploreCombatWildTurn}`, "moveboxFire 1 0.5s");
-
-
 
 
             if (nextMove != undefined) {
@@ -3475,8 +3077,6 @@ function returnTypeMultipliers(pkmn) {
 
                 pkmn[ team[exploreActiveMember].pkmn.id ].playerHp -= totalPower;
 
-
-
                 if (wildBuffs.burn>0 ) {wildPkmnHp -=  wildPkmnHpMax/4 ; updateWildPkmn()}
                 if (wildBuffs.poisoned>0 ) {wildPkmnHp -=  wildPkmnHpMax/4 ; updateWildPkmn()}
 
@@ -3488,26 +3088,10 @@ function returnTypeMultipliers(pkmn) {
                 if (move[nextMove].hitEffect) move[nextMove].hitEffect("player")
                  updateWildBuffs()
                  updateTeamBuffs()
-                 
-
 
             } 
 
-
-
-
-
-
-
-
-
-
-
-
-
             exploreCombatWildTurn++;
-
-
 
             if (exploreCombatWildTurn >= 5) exploreCombatWildTurn = 1;
 
@@ -3518,8 +3102,6 @@ function returnTypeMultipliers(pkmn) {
 
     requestAnimationFrame(animate);
 }*/
-
-
 
 
 let exploreCombatWildTurn = 1
@@ -3564,8 +3146,6 @@ function exploreCombatWild() {
     if (wildBuffs.speup2 > 0) moveTimerWild = move[nextMoveWild]?.timer / 1.75
 
 
-
-
     //afk time
     /*
     if (afkSeconds > 0) { 
@@ -3603,8 +3183,6 @@ function exploreCombatWild() {
 
     barProgressWild += 100 / ((moveTimerWild * Math.pow(0.9, speedStars)) / (1000 / 60));
 
-
-
     if (barProgressWild < 99) {
         //requestAnimationFrame(exploreCombatWild)
         return
@@ -3627,10 +3205,6 @@ function exploreCombatWild() {
         exploreCombatWildTurn++;
         if (exploreCombatWildTurn >= 5) exploreCombatWildTurn = 1;
         barWild.style.width = `0%`;
-
-
-
-
 
 
         //move execution
@@ -3668,8 +3242,6 @@ function exploreCombatWild() {
 
         if (move[nextMoveWild].split == 'special') {
 
-
-
             let attackerStars = pkmn[ saved.currentPkmn ].bst.satk
             if (areas[saved.currentArea].id == areas.training.id) attackerStars = returnDivisionStars(pkmn[ saved.currentPkmn ])
             //if (saved.weatherTimer>0 && saved.weather=="weirdRoom") attackerStars = Math.max(attackerStars-3,1)
@@ -3693,10 +3265,6 @@ function exploreCombatWild() {
             }
             
         }
-
-
-
-
 
 
         //buffs
@@ -3735,8 +3303,6 @@ function exploreCombatWild() {
         }
 
 
-
-
         let superEffective = false
         if (typeEffectiveness(move[nextMoveWild].type, pkmn[team[exploreActiveMember].pkmn.id].type) > 1) superEffective = true
 
@@ -3757,8 +3323,6 @@ function exploreCombatWild() {
 
         if (saved.weatherTimer>0 && saved.weather=="lightScreen" && typeMultiplier>1) typeMultiplier = 1
         if (testAbility(`active`,  ability.shieldsDown.id ) && typeMultiplier>1) typeMultiplier = 1
-
-
 
         totalPower *= typeMultiplier
 
@@ -3872,19 +3436,7 @@ function exploreCombatWild() {
         
         if (saved.weatherTimer>0 && saved.weather=="trickRoom" ) totalPower *= Math.pow(1.07,7 - pkmn[saved.currentPkmn].bst.spe)
 
-
-
-
-
-
-
-
-
-
-
         if (testAbility(`active`,  ability.wonderGuard.id) && typeMultiplier<=1) totalPower*=0.2
-
-
 
 
         pkmn[ team[exploreActiveMember].pkmn.id ].playerHp -= totalPower;
@@ -3897,15 +3449,11 @@ function exploreCombatWild() {
         if (areas[saved.currentArea]?.difficulty >= tier4difficulty && areas[saved.currentArea]?.type == "dimension" &&  (   areas[saved.currentArea]?.tier == 3 || areas[saved.currentArea]?.tier == 4    )) dotDamage = 400
 
 
-
-
         if (wildBuffs.burn>0 && testAbility("active",  ability.scorch.id) == true ) dotDamage /= 2
         if (wildBuffs.burn>0 && testAbility("active",  ability.scorch.id) == "nerf" ) dotDamage /= 1.5
 
         if (wildBuffs.poisoned>0 && testAbility("active",  ability.corrosion.id) == true ) dotDamage /= 2
         if (wildBuffs.poisoned>0 && testAbility("active",  ability.corrosion.id) == "nerf" ) dotDamage /= 1.5
-
-
 
 
         if (saved.currentArea == areas.frontierBattleFactory.id){ wildBuffs.poisoned = 0; wildBuffs.burn = 0; }
@@ -3997,8 +3545,6 @@ function initialiseArea(){
 
     saveGame()
 
-
-
     document.getElementById("auto-refight-info").style.display = "none"
 
     if (saved.autoRefight==true){
@@ -4020,10 +3566,6 @@ function initialiseArea(){
     }
 
 
-
-
-
-
     if (testAbility(`active`,  ability.drizzle.id )) changeWeather("rainy")
     if (testAbility(`active`,  ability.drought.id )) changeWeather("sunny")
     if (testAbility(`active`,  ability.sandStream.id )) changeWeather("sandstorm")
@@ -4034,8 +3576,6 @@ function initialiseArea(){
     if (testAbility(`active`,  ability.mistySurge.id )) changeWeather("mistyTerrain")
 
 
-
-
     if (areas[saved.currentArea].hpPercentage) {
         wildPkmnHp = wildPkmnHpMax * (areas[saved.currentArea].hpPercentage / 100)
         updateWildPkmn()
@@ -4043,14 +3583,6 @@ function initialiseArea(){
 
 
     if (areas[saved.currentArea].timed) raidTimer = areas[saved.currentArea].timed
-
-
-
-
-
-
-
-
 
 }
 
@@ -4080,8 +3612,6 @@ function setWildAreas() {
                 Events</div>
     `
 
-
-
     document.getElementById("explore-listing").innerHTML = ""
     document.getElementById("explore-menu-header").innerHTML = `
     <div style="display:flex; gap:0.2rem" >
@@ -4103,22 +3633,6 @@ function setWildAreas() {
     let ticketIndex = 0
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     //seasonal events
     for (const i in season) {
 
@@ -4127,8 +3641,6 @@ function setWildAreas() {
     const div = document.createElement("div");
     div.className = "explore-ticket frontier-ticket";
     div.style.filter = `hue-rotate(${season[i].hue}deg)`
-
-
 
     let seasonTimer = `Limited Area Until ${season[saved.currentSeason].end.month}/${season[saved.currentSeason].end.day}`
     if (saved.temporalSeason != undefined) seasonTimer = `Limited Area Until ${saved.temporalSeason.end.month}/${saved.temporalSeason.end.day}`
@@ -4156,37 +3668,7 @@ function setWildAreas() {
     })
 
 
-
-
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     //generate the wildlife park pokemon
     if (saved.lastWildlifeRotation != rotationWildCurrent && document.getElementById("explore-menu").style.display == "flex" ) {
@@ -4203,20 +3685,7 @@ function setWildAreas() {
     }
 
 
-    let completionMark = true
-    let shinyMark = true
-    for (const i in areas.wildlifePark.spawns){
-        for (const e in areas.wildlifePark.spawns[i]){
-        if (pkmn[areas.wildlifePark.spawns[i][e].id].caught<=0) completionMark = false
-        if (pkmn[areas.wildlifePark.spawns[i][e].id].shiny!=true) shinyMark = false
-        }
-    }
-
-    let completedFlair = ""
-    if (completionMark==true) completedFlair = `<svg style="color: rgb(105, 118, 175); opacity: 0.7" class="completed-flair" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15"><path fill="currentColor" d="M14 1v1.5c-.75 0-.75 1.5 0 1.5v1.25c-.75 0-.75 1.5 0 1.5v1.5c-.75 0-.75 1.5 0 1.5V11c-.75 0-.75 1.5 0 1.5V14h-1.5c0-.75-1.5-.75-1.5 0H9.75c0-.75-1.5-.75-1.5 0h-1.5c0-.75-1.5-.75-1.5 0H4c0-.75-1.5-.75-1.5 0H1v-1.5c.75 0 .75-1.5 0-1.5V9.75c.75 0 .75-1.5 0-1.5v-1.5c.75 0 .75-1.5 0-1.5V4c.75 0 .75-1.5 0-1.5V1h1.5c0 .75 1.5.75 1.5 0h1.25c0 .75 1.5.75 1.5 0h1.5c0 .75 1.5.75 1.5 0H11c0 .75 1.5.75 1.5 0zm-2 2H3v9h9zm-1 1v7H4V4z"/></svg>`
-    if (shinyMark==true) completedFlair = `<svg style="color: rgb(209, 130, 11); opacity: 0.7" class="completed-flair" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15"><path fill="currentColor" d="M14 1v1.5c-.75 0-.75 1.5 0 1.5v1.25c-.75 0-.75 1.5 0 1.5v1.5c-.75 0-.75 1.5 0 1.5V11c-.75 0-.75 1.5 0 1.5V14h-1.5c0-.75-1.5-.75-1.5 0H9.75c0-.75-1.5-.75-1.5 0h-1.5c0-.75-1.5-.75-1.5 0H4c0-.75-1.5-.75-1.5 0H1v-1.5c.75 0 .75-1.5 0-1.5V9.75c.75 0 .75-1.5 0-1.5v-1.5c.75 0 .75-1.5 0-1.5V4c.75 0 .75-1.5 0-1.5V1h1.5c0 .75 1.5.75 1.5 0h1.25c0 .75 1.5.75 1.5 0h1.5c0 .75 1.5.75 1.5 0H11c0 .75 1.5.75 1.5 0zm-2 2H3v9h9zm-1 1v7H4V4z"/></svg>`
-
-
+    const completedFlair = renderRoutePokemonProgress(areas.wildlifePark)
 
     const divPark = document.createElement("div");
     divPark.className = "explore-ticket";
@@ -4254,58 +3723,6 @@ function setWildAreas() {
         })
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     for (const i in areas) {
         if (areas[i].type !== "wild") continue;
         if (areas[i].rotation !== currentWildRotation) continue;
@@ -4338,22 +3755,7 @@ function setWildAreas() {
         ticketIndex++
 
 
-    let completionMark = true
-    let shinyMark = true
-    for (const e in areas[i].spawns){
-        for (const x in areas[i].spawns[e]){
-        if (pkmn[areas[i].spawns[e][x].id].caught<=0) completionMark = false
-        if (pkmn[areas[i].spawns[e][x].id].shiny!=true) shinyMark = false
-        }
-    }
-    
-
-    let completedFlair = ""
-    if (completionMark==true) completedFlair = `<svg style="color: rgb(105, 118, 175); opacity: 0.7" class="completed-flair" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15"><path fill="currentColor" d="M14 1v1.5c-.75 0-.75 1.5 0 1.5v1.25c-.75 0-.75 1.5 0 1.5v1.5c-.75 0-.75 1.5 0 1.5V11c-.75 0-.75 1.5 0 1.5V14h-1.5c0-.75-1.5-.75-1.5 0H9.75c0-.75-1.5-.75-1.5 0h-1.5c0-.75-1.5-.75-1.5 0H4c0-.75-1.5-.75-1.5 0H1v-1.5c.75 0 .75-1.5 0-1.5V9.75c.75 0 .75-1.5 0-1.5v-1.5c.75 0 .75-1.5 0-1.5V4c.75 0 .75-1.5 0-1.5V1h1.5c0 .75 1.5.75 1.5 0h1.25c0 .75 1.5.75 1.5 0h1.5c0 .75 1.5.75 1.5 0H11c0 .75 1.5.75 1.5 0zm-2 2H3v9h9zm-1 1v7H4V4z"/></svg>`
-    if (shinyMark==true) completedFlair = `<svg style="color: rgb(209, 130, 11); opacity: 0.7" class="completed-flair" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15"><path fill="currentColor" d="M14 1v1.5c-.75 0-.75 1.5 0 1.5v1.25c-.75 0-.75 1.5 0 1.5v1.5c-.75 0-.75 1.5 0 1.5V11c-.75 0-.75 1.5 0 1.5V14h-1.5c0-.75-1.5-.75-1.5 0H9.75c0-.75-1.5-.75-1.5 0h-1.5c0-.75-1.5-.75-1.5 0H4c0-.75-1.5-.75-1.5 0H1v-1.5c.75 0 .75-1.5 0-1.5V9.75c.75 0 .75-1.5 0-1.5v-1.5c.75 0 .75-1.5 0-1.5V4c.75 0 .75-1.5 0-1.5V1h1.5c0 .75 1.5.75 1.5 0h1.25c0 .75 1.5.75 1.5 0h1.5c0 .75 1.5.75 1.5 0H11c0 .75 1.5.75 1.5 0zm-2 2H3v9h9zm-1 1v7H4V4z"/></svg>`
-
-        
-
+    const completedFlair = renderRoutePokemonProgress(areas[i])
 
         divAreas.innerHTML = `
                 ${unlockRequirement}
@@ -4383,8 +3785,6 @@ function setWildAreas() {
 }
 
 function setDungeonAreas() {
-
-
 
         document.getElementById("event-banner").style.display = "none"
     document.getElementById("event-banner-category").style.display = "none"
@@ -4416,8 +3816,6 @@ function setDungeonAreas() {
     Rotation ${rotationDungeonCurrent}/${rotationDungeonMax}</strong>
     <div class="time-counter-daily"></div>
     </div>
-
-
 
     `
     document.getElementById("explore-menu-header").style.backgroundImage = "url(img/bg/cave.png)" 
@@ -4465,8 +3863,6 @@ function setDungeonAreas() {
 
                 <svg class="barcode-flair" xmlns="http://www.w3.org/2000/svg" width="236" height="144"><svg id="barcodeSVG" role="img" aria-label="Barcode preview" width="234px" height="142px" x="0px" y="0px" viewBox="0 0 234 142" xmlns="http://www.w3.org/2000/svg" version="1.1" style="transform: translate(0,0)"><rect x="0" y="0" width="234" height="142" style="fill:none;"/><g transform="translate(10, 10)" style="fill:#000000;"><text style="font: 20px Roboto" text-anchor="start" x="0" y="122">5</text></g><g transform="translate(34, 10)" style="fill:#000000;"><rect x="0" y="0" width="2" height="112"/><rect x="4" y="0" width="2" height="112"/><text style="font: 20px Roboto" text-anchor="middle" x="3" y="134"></text></g><g transform="translate(40, 10)" style="fill:#000000;"><rect x="6" y="0" width="2" height="100"/><rect x="10" y="0" width="4" height="100"/><rect x="16" y="0" width="2" height="100"/><rect x="22" y="0" width="6" height="100"/><rect x="30" y="0" width="4" height="100"/><rect x="38" y="0" width="4" height="100"/><rect x="46" y="0" width="2" height="100"/><rect x="52" y="0" width="4" height="100"/><rect x="58" y="0" width="8" height="100"/><rect x="68" y="0" width="2" height="100"/><rect x="74" y="0" width="6" height="100"/><rect x="82" y="0" width="2" height="100"/><text style="font: 20px Roboto" text-anchor="middle" x="42" y="122">901234</text></g><g transform="translate(124, 10)" style="fill:#000000;"><rect x="2" y="0" width="2" height="112"/><rect x="6" y="0" width="2" height="112"/><text style="font: 20px Roboto" text-anchor="middle" x="5" y="134"></text></g><g transform="translate(134, 10)" style="fill:#000000;"><rect x="0" y="0" width="4" height="100"/><rect x="8" y="0" width="4" height="100"/><rect x="14" y="0" width="4" height="100"/><rect x="20" y="0" width="4" height="100"/><rect x="28" y="0" width="2" height="100"/><rect x="38" y="0" width="2" height="100"/><rect x="42" y="0" width="2" height="100"/><rect x="46" y="0" width="6" height="100"/><rect x="56" y="0" width="2" height="100"/><rect x="62" y="0" width="6" height="100"/><rect x="70" y="0" width="2" height="100"/><rect x="78" y="0" width="2" height="100"/><text style="font: 20px Roboto" text-anchor="middle" x="42" y="122">123457</text></g><g transform="translate(218, 10)" style="fill:#000000;"><rect x="0" y="0" width="2" height="112"/><rect x="4" y="0" width="2" height="112"/><text style="font: 20px Roboto" text-anchor="middle" x="3" y="134"></text></g></svg></svg>
 
-
-
                     <span class="explore-ticket-left">
 
                     
@@ -4492,8 +3888,6 @@ function setDungeonAreas() {
 
 }
 
-
-
 let eventCategory = 1
 
 function setEventAreas() {
@@ -4507,8 +3901,6 @@ function setEventAreas() {
         openTooltip()
         return
     }
-
-
 
     if (eventCategory==2 && areas.vsTeamLeaderGiovanni.defeated!=true){
         eventCategory=1
@@ -4529,8 +3921,6 @@ function setEventAreas() {
         openTooltip()
         return
     }
-
-
 
     document.getElementById("event-banner").style.display = "flex"
     document.getElementById("event-banner-category").style.display = "flex"
@@ -4558,8 +3948,6 @@ function setEventAreas() {
     document.getElementById("event-selector-"+eventCategory).style = `background: #91718B; outline: solid 1px #F97DFF; color: white`
 
 
-
-
     document.getElementById("explore-selector").innerHTML = `
             <div onclick="setWildAreas()">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="m17.861 3.163l.16.054l1.202.4c.463.155.87.29 1.191.44c.348.162.667.37.911.709s.341.707.385 1.088c.04.353.04.781.04 1.27v8.212c0 .698 0 1.287-.054 1.753c-.056.484-.182.962-.535 1.348a2.25 2.25 0 0 1-.746.538c-.478.212-.971.18-1.448.081c-.46-.096-1.018-.282-1.68-.503l-.043-.014c-1.12-.374-1.505-.49-1.877-.477a2.3 2.3 0 0 0-.441.059c-.363.085-.703.299-1.686.954l-1.382.922l-.14.093c-1.062.709-1.8 1.201-2.664 1.317c-.863.116-1.705-.165-2.915-.57l-.16-.053l-1.202-.4c-.463-.155-.87-.29-1.191-.44c-.348-.162-.667-.37-.911-.71c-.244-.338-.341-.706-.385-1.088c-.04-.353-.04-.78-.04-1.269V8.665c0-.699 0-1.288.054-1.753c.056-.484.182-.962.535-1.348a2.25 2.25 0 0 1 .746-.538c.478-.213.972-.181 1.448-.081c.46.095 1.018.282 1.68.503l.043.014c1.12.373 1.505.49 1.878.477a2.3 2.3 0 0 0 .44-.059c.363-.086.703-.3 1.686-.954l1.382-.922l.14-.094c1.062-.708 1.8-1.2 2.663-1.316c.864-.116 1.706.165 2.916.57m-2.111.943V16.58c.536.058 1.1.246 1.843.494l.125.042c.717.239 1.192.396 1.555.472c.356.074.477.04.532.016a.75.75 0 0 0 .249-.179c.04-.044.11-.149.152-.51c.043-.368.044-.869.044-1.624V7.163c0-.54-.001-.88-.03-1.138c-.028-.239-.072-.328-.112-.382c-.039-.054-.109-.125-.326-.226c-.236-.11-.56-.218-1.07-.389l-1.165-.388c-.887-.296-1.413-.464-1.797-.534m-1.5 12.654V4.434c-.311.18-.71.441-1.276.818l-1.382.922l-.11.073c-.688.46-1.201.802-1.732.994v12.326c.311-.18.71-.442 1.276-.819l1.382-.921l.11-.073c.688-.46 1.201-.802 1.732-.994m-6 3.135V7.42c-.536-.058-1.1-.246-1.843-.494l-.125-.042c-.717-.239-1.192-.396-1.556-.472c-.355-.074-.476-.041-.53-.017a.75.75 0 0 0-.25.18c-.04.043-.11.148-.152.509c-.043.368-.044.87-.044 1.625v8.128c0 .54.001.88.03 1.138c.028.239.072.327.112.382c.039.054.109.125.326.226c.236.11.56.218 1.07.389l1.165.388c.887.295 1.412.463 1.797.534" clip-rule="evenodd"/></svg>                Wild Areas</div>
@@ -4570,8 +3958,6 @@ function setEventAreas() {
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="m5.658 11.002l-1.47 3.308c-1.856 4.174-2.783 6.261-1.77 7.274s3.098.085 7.272-1.77L13 18.342c2.517-1.119 3.776-1.678 3.976-2.757s-.774-2.053-2.722-4l-1.838-1.839c-1.947-1.948-2.921-2.922-4-2.721c-1.079.2-1.638 1.459-2.757 3.976M6.5 10.5l7 7m-9-2l4 4M16 8l3-3m-4.803-3c.4.667.719 2.4-1.197 4m9 3.803c-.667-.4-2.4-.719-4 1.197m0-9v.02M22 6v.02M21 13v.02M11 3v.02"/></svg>
                 Events</div>
     `
-
-
 
     document.getElementById("explore-listing").innerHTML = ""
     document.getElementById("explore-menu-header").innerHTML = `
@@ -4606,8 +3992,6 @@ function setEventAreas() {
         divAreas.dataset.area = i
 
         if ( areas[i].unlockRequirement == undefined || areas[i].unlockRequirement() ) {
-
-
 
         divAreas.addEventListener("click", e => { 
             
@@ -4666,12 +4050,6 @@ function setEventAreas() {
 
         divAreas.innerHTML = `
 
-
-
-
-
-
-
                         ${unlockRequirement}
                 <span class="hitbox"></span>
 
@@ -4680,8 +4058,6 @@ function setEventAreas() {
 
 
                 <svg class="barcode-flair" xmlns="http://www.w3.org/2000/svg" width="236" height="144"><svg id="barcodeSVG" role="img" aria-label="Barcode preview" width="234px" height="142px" x="0px" y="0px" viewBox="0 0 234 142" xmlns="http://www.w3.org/2000/svg" version="1.1" style="transform: translate(0,0)"><rect x="0" y="0" width="234" height="142" style="fill:none;"/><g transform="translate(10, 10)" style="fill:#000000;"><text style="font: 20px Roboto" text-anchor="start" x="0" y="122">5</text></g><g transform="translate(34, 10)" style="fill:#000000;"><rect x="0" y="0" width="2" height="112"/><rect x="4" y="0" width="2" height="112"/><text style="font: 20px Roboto" text-anchor="middle" x="3" y="134"></text></g><g transform="translate(40, 10)" style="fill:#000000;"><rect x="6" y="0" width="2" height="100"/><rect x="10" y="0" width="4" height="100"/><rect x="16" y="0" width="2" height="100"/><rect x="22" y="0" width="6" height="100"/><rect x="30" y="0" width="4" height="100"/><rect x="38" y="0" width="4" height="100"/><rect x="46" y="0" width="2" height="100"/><rect x="52" y="0" width="4" height="100"/><rect x="58" y="0" width="8" height="100"/><rect x="68" y="0" width="2" height="100"/><rect x="74" y="0" width="6" height="100"/><rect x="82" y="0" width="2" height="100"/><text style="font: 20px Roboto" text-anchor="middle" x="42" y="122">901234</text></g><g transform="translate(124, 10)" style="fill:#000000;"><rect x="2" y="0" width="2" height="112"/><rect x="6" y="0" width="2" height="112"/><text style="font: 20px Roboto" text-anchor="middle" x="5" y="134"></text></g><g transform="translate(134, 10)" style="fill:#000000;"><rect x="0" y="0" width="4" height="100"/><rect x="8" y="0" width="4" height="100"/><rect x="14" y="0" width="4" height="100"/><rect x="20" y="0" width="4" height="100"/><rect x="28" y="0" width="2" height="100"/><rect x="38" y="0" width="2" height="100"/><rect x="42" y="0" width="2" height="100"/><rect x="46" y="0" width="6" height="100"/><rect x="56" y="0" width="2" height="100"/><rect x="62" y="0" width="6" height="100"/><rect x="70" y="0" width="2" height="100"/><rect x="78" y="0" width="2" height="100"/><text style="font: 20px Roboto" text-anchor="middle" x="42" y="122">123457</text></g><g transform="translate(218, 10)" style="fill:#000000;"><rect x="0" y="0" width="2" height="112"/><rect x="4" y="0" width="2" height="112"/><text style="font: 20px Roboto" text-anchor="middle" x="3" y="134"></text></g></svg></svg>
-
-
 
                     <span class="explore-ticket-left">
 
@@ -4700,12 +4076,6 @@ function setEventAreas() {
                     <img class="explore-ticket-sprite sprite-trim" style="z-index: 10;" src="img/pkmn/sprite/${areas[i].icon.id}.png">
                 </div>
 
-
-
-
-
-
-
         `;
 
         if (areas[i].encounter) {
@@ -4718,18 +4088,12 @@ function setEventAreas() {
         document.getElementById("explore-listing").appendChild(divAreas);
 
 
-
-
     }
-
-
 
     updateEventCounters()
 
 
 }
-
-
 
 
 let rotationEventCurrent = 1;
@@ -4827,8 +4191,6 @@ function updateEventCounters() {
 }
 
 
-
-
 let raidTimer = 60
 function updateRaidTimer(){
 
@@ -4857,8 +4219,6 @@ function updateRaidTimer(){
 
 
         raidTimer = 60
-
-
 
 
     }
@@ -5165,10 +4525,6 @@ function updatePokedex(){
     let sortedPokemon = []
 
 
-
-
-
-
     //create an array, used for sorting
     for (const i in pkmn) {
         //filters
@@ -5279,8 +4635,6 @@ if (document.getElementById("pokedex-search").value!="") {
     sortedPokemon = searchedPkmn.map(r => r.item);
 }
 
-
-
  // shitty hack, refilter after search
     if (sort !== "default") {
         sortedPokemon.sort((b, a) => {
@@ -5303,8 +4657,6 @@ if (document.getElementById("pokedex-search").value!="") {
             return 0
         })
     }
-
-
 
     for (const p of sortedPokemon) {
 
@@ -5349,8 +4701,6 @@ if (document.getElementById("pokedex-search").value!="") {
 
         if (pkmn[i].pokerus==true) nameMarks += `<strong style="color:${returnTypeColor("poison")}; margin-left:0.2rem; transform:translateY(8%)"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14"><path fill="currentColor" fill-rule="evenodd" d="M8.793.365a.75.75 0 0 1 .806.69c.042.55.225 1.33.645 2.429c1.29.492 2.132.657 2.681.656a.75.75 0 0 1 .003 1.5c-.567 0-1.245-.113-2.068-.36c.21.825.274 1.549.199 2.198c-.121 1.045-.592 1.816-1.218 2.442c-.732.731-1.647 1.236-2.933 1.248a.75.75 0 1 1-.015-1.5c.524-.005.937-.126 1.296-.339L4.4 5.539a2.4 2.4 0 0 0-.318.963c-.078.67.055 1.603.6 2.964c.61 1.526.882 2.667.88 3.54a.75.75 0 0 1-1.5-.002c.001-.549-.163-1.392-.656-2.68c-1.059-.405-1.82-.59-2.368-.641a.75.75 0 1 1 .14-1.494a8.4 8.4 0 0 1 1.613.338c-.21-.825-.274-1.548-.199-2.198c.121-1.045.592-1.815 1.218-2.441c.769-.77 1.735-1.281 3.11-1.247a.75.75 0 0 1-.037 1.5c-.586-.015-1.036.108-1.422.338l3.79 3.79a2.4 2.4 0 0 0 .319-.963c.077-.671-.055-1.604-.6-2.964c-.53-1.327-.803-2.356-.866-3.17a.75.75 0 0 1 .69-.807" clip-rule="evenodd"/></svg></strong>`
 
-
-
         div.innerHTML = `<span style="display:flex; white-space:nowrap">lvl ${pkmn[i].level} ${nameMarks}</span><img class="sprite-trim" src="img/pkmn/sprite/${i}.png">`
         if (pkmn[i].shiny) div.innerHTML = `<span style="display:flex; white-space:nowrap">lvl ${pkmn[i].level} ${nameMarks}</span> <img class="sprite-trim" src="img/pkmn/shiny/${i}.png">`
         if (pkmn[i].shiny && pkmn[i].shinyDisabled == true) div.innerHTML = `<span style="display:flex; white-space:nowrap">lvl ${pkmn[i].level} ${nameMarks}</span><img class="sprite-trim" src="img/pkmn/sprite/${i}.png">`
@@ -5366,8 +4716,6 @@ if (document.getElementById("pokedex-search").value!="") {
         if (dexTeamSelect!==undefined) { //preview team display
             document.getElementById(`pokedex-filters-cancel`).style.display = "flex"
         }
-
-
 
         if (tmToTeach != undefined) {
 
@@ -5487,8 +4835,6 @@ if (document.getElementById("pokedex-search").value!="") {
 
         if (itemToUse != undefined) {
 
-
-
             
             if (itemToUse == item.rareCandy.id){
                 if (pkmn[i].level >= 100) continue
@@ -5573,8 +4919,6 @@ if (document.getElementById("pokedex-search").value!="") {
                 if (noMoves) document.getElementById("tooltipMid").innerHTML = `
                 No new moves to remember
                 `
-
-
 
         
                 /*
@@ -5715,8 +5059,6 @@ if (document.getElementById("pokedex-search").value!="") {
 
     }
 
-
-
         if (dexHostSelect == true) {
 
             if (pkmn[i].level!=100) continue
@@ -5738,8 +5080,6 @@ if (document.getElementById("pokedex-search").value!="") {
             })
 
         }
-
-
 
         if (dexTrainSelect == true) {
 
@@ -5765,8 +5105,6 @@ if (document.getElementById("pokedex-search").value!="") {
 
         if (dexSampleSelect == true) {
 
-
-   
             if (pkmn[i].id == saved.geneticHost) continue
 
 
@@ -5784,8 +5122,6 @@ if (document.getElementById("pokedex-search").value!="") {
             })
 
         }
-
-
 
         document.getElementById("pokedex-list").appendChild(div);
 
@@ -5817,50 +5153,6 @@ document.addEventListener('click', (event) => {
   }
 });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 function tagMenuAssign(){
     document.getElementById("tooltipTop").style.display = `none`
     document.getElementById("tooltipTitle").style.display = `none`
@@ -5880,9 +5172,7 @@ function tagMenuAssign(){
         document.getElementById("tag-listing").innerHTML = 'No tags created yet';
         return;
     }
-    
 
-    
     saved.tagSystemTags.forEach((i, index) => {
         const div = document.createElement(`div`)
         
@@ -5945,8 +5235,6 @@ function updateEditorTags(){
         document.getElementById(`tag-system-editor-tags`).innerHTML += `<span style="color:#999"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M5 10c-1.1 0-2 .9-2 2s.9 2 2 2s2-.9 2-2s-.9-2-2-2m14 0c-1.1 0-2 .9-2 2s.9 2 2 2s2-.9 2-2s-.9-2-2-2m-7 0c-1.1 0-2 .9-2 2s.9 2 2 2s2-.9 2-2s-.9-2-2-2"/></svg></span>`
     }
 }
-
-
 
 
 // Create the array outside the function
@@ -6078,8 +5366,6 @@ function tagMenuCreate(){
 
 }
 
-
-
         const tagSystemIcons = [
             { name: 'star', svg: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>' },
             { name: 'heart', svg: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>' },
@@ -6095,8 +5381,6 @@ function tagMenuCreate(){
             { name: 'music', svg: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>' }
         ];
 
-
- 
         // Store tags
         saved.tagSystemTags = [];
         let tagSystemSelectedIcon = null;
@@ -6119,15 +5403,9 @@ function tagMenuCreate(){
             document.querySelectorAll('.tag-system-icon-option')[index].classList.add('tag-system-selected');
             tagSystemSelectedIcon = tagSystemIcons[index];
         }
- 
 
- 
         // Save tag
         function tagSystemSaveTag() {
-
-
-
-
 
 
             const tagName = document.getElementById('tag-system-tagName').value.trim();
@@ -6189,68 +5467,6 @@ function tagMenuCreate(){
  
         // Initialize
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 function exitTmTeaching(mod){ //what a fucking disgrace of a code i wrote here
 
                 if (evoItemToUse || tmToTeach || vitaminToUse || itemToUse ||memoryToTeach){
@@ -6261,8 +5477,6 @@ function exitTmTeaching(mod){ //what a fucking disgrace of a code i wrote here
                 itemToUse = undefined
                 document.getElementById("menu-button-parent").style.display = "flex"
 
-                
-
 
                 document.getElementById(`pokedex-menu`).style.zIndex = "30"
                 document.getElementById(`item-menu`).style.zIndex = "40"
@@ -6272,8 +5486,6 @@ function exitTmTeaching(mod){ //what a fucking disgrace of a code i wrote here
                 document.getElementById(`pokedex-menu`).style.display = "none"
                 document.getElementById(`pokedex-menu`).style.zIndex = "30"
 }
-
-
 
     if (dexHostSelect==true && mod=="remove"){
         saved.geneticHost = undefined;
@@ -6441,8 +5653,6 @@ function switchMenu(id){
 
         if (saved.currentArea!==undefined) {openMenu(); return; }
 
-
-
         document.getElementById(`dimension-menu`).style.display = "flex"
         document.getElementById(`dimension-menu`).style.zIndex = "40"
         updateMegaDimension()
@@ -6593,6 +5803,10 @@ function updateItemBag(){
 
         const div = document.createElement(`div`)
 
+        const visualTier = getItemVisualTier(i)
+        div.classList.add(`item-level-${visualTier.tier}`)
+        div.dataset.itemLevel = visualTier.tier
+
 
         let subtitle = ""
         if (item[i].subtitle) subtitle = `<text style="opacity:0.6; margin-left:0.2rem">${item[i].subtitle}</text>`
@@ -6603,8 +5817,6 @@ function updateItemBag(){
         else if (item[i].type == "memory") div.innerHTML = `<img src="img/items/${item[i].image}Memory.png"> <span class="item-list-name">${format(i)} ${subtitle}</span> <span>x${item[i].got}</span>`
         else if (item[i].type == "decor") div.innerHTML = `<img src="img/decor/${i}.png" style="scale:1; margin:0 -1rem"> <span class="item-list-name">${format(i)} ${subtitle}</span> <span>x${item[i].got}</span>`
         else div.innerHTML = `<img src="img/items/${i}.png"> <span class="item-list-name">${format(i)} ${subtitle}</span> <span>x${item[i].got}</span>`
-
-
 
         if (item[i].type == "tm" && dexTeamSelect==undefined) {
 
@@ -6645,16 +5857,6 @@ function updateItemBag(){
             })
         }
 
-
-
-
-
-
-
-
-
-
-
         if (item[i].usable) { 
             div.addEventListener("click", e => { 
             item[i].effect() 
@@ -6679,8 +5881,6 @@ function updateItemBag(){
 
             })
         }
-
-
 
 
         if (item[i].vitamin && dexTeamSelect==undefined) {
@@ -6780,8 +5980,6 @@ function updateItemBag(){
         })
 
 
-
-
     }
 
 
@@ -6792,13 +5990,7 @@ function updateItemBag(){
 }
 
 
-
-
 function updateVS() {
-
-
-
-
 
         document.getElementById("vs-selector").innerHTML = `
             <div style="background: #465f96; outline: solid 1px #3d61ff; color: white; z-index: 2;"  onclick="updateVS()">
@@ -6884,10 +6076,6 @@ function updateVS() {
                 </div>
         `;
 
-
-        
-
-
         document.getElementById(`vs-listing`).appendChild(divAreas)
 
             if (!firstOne) {
@@ -6927,12 +6115,6 @@ function resetSpiralingTower(){
     saved.maxSpiralFloor = 1    
     saved.currentSpiralingType = arrayPick([`normal`,`fire`,`water`,`grass`,`bug`,`poison`,`dark`,`ghost`,`psychic`,`fighting`,`flying`,`dragon`,`fairy`,`steel`,`ground`,`rock`,`electric`,`ice`])
     saved.maxFactoryScore = 0 
-
-
-
-
-
-
 
     
 
@@ -7065,24 +6247,10 @@ for (const i in areas) {
 
 }
 
-
-
-
-
-
-
-
-
-
-
     
 }
 
 */
-
-
-
-
 
 
 function createFrontierTrainers(){ //fix by enyxiel
@@ -7195,8 +6363,6 @@ for (const i in areas) {
   areas[i].team.slot6 = pkmn6;
   areas[i].team.slot6Moves = generateMoves(pkmn6.id);
 
-
-
 }
 
 }
@@ -7209,13 +6375,7 @@ function generateMoves(id) {
     return moves;
 }    
 
-
-
     createArenaCards()
-
-
-
-
 
 /*function randomDivisionPkmn(division, type, exclude) {
     const selection = []
@@ -7261,8 +6421,6 @@ function randomDivisionPkmn(division, type, exclude, seed, mod) {
 
     selection.push(i);
   }
-
-
 
   return rng === undefined
     ? arrayPick(selection)
@@ -7327,8 +6485,6 @@ function updateFrontier() {
 
     document.getElementById("vs-menu-header").innerHTML = `
 
-
-
     <div style="display:flex; gap:0.2rem" >
     <span >
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.5" d="M17 22H7a2 2 0 0 1-2-2v-8.818a.6.6 0 0 0-.1-.333L3.1 8.15a.6.6 0 0 1-.1-.333V2.6a.6.6 0 0 1 .6-.6h1.8a.6.6 0 0 1 .6.6v1.8a.6.6 0 0 0 .6.6h2.8a.6.6 0 0 0 .6-.6V2.6a.6.6 0 0 1 .6-.6h2.8a.6.6 0 0 1 .6.6v1.8a.6.6 0 0 0 .6.6h2.8a.6.6 0 0 0 .6-.6V2.6a.6.6 0 0 1 .6-.6h1.8a.6.6 0 0 1 .6.6v5.218a.6.6 0 0 1-.1.333l-1.8 2.698a.6.6 0 0 0-.1.333V20a2 2 0 0 1-2 2Z"/></svg>
@@ -7356,20 +6512,6 @@ function updateFrontier() {
     updateEventCounters()
     updateDailyCounters()
     document.getElementById("vs-menu-header").style.backgroundImage = "url(img/bg/tower.png)"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     //battle tower
@@ -7407,10 +6549,6 @@ function updateFrontier() {
         document.getElementById(`explore-menu`).style.display = `none`
     })
 
-
-
-
-
     //battle factory
     const factory = document.createElement("div");
     factory.className = "explore-ticket frontier-ticket";
@@ -7444,10 +6582,6 @@ function updateFrontier() {
     })
 
 
-
-
-
-
     //battle arena
     const arena = document.createElement("div");
     arena.className = "explore-ticket frontier-ticket";
@@ -7472,16 +6606,6 @@ function updateFrontier() {
     arena.addEventListener("click", e => { 
     tooltipData('arenaPreview', undefined)
     })
-
-
-
-
-
-
-
-
-
-
 
 
  //if (document.getElementById(`vs-listing`).innerHTML == "") document.getElementById(`vs-listing`).innerHTML = `<div style="display:flex; flex-direction:column; justify-content:center; align-items:center; background:#ECDEB7; border-radius:0.3rem; height:15rem; width:15rem; text-align:center"><img src="img/pkmn/sprite/pikachuRockstar.png">All trainers defeated!<br><span style="font-size:0.9rem; opacity:0.7">How about the Battle Frontier?</span></div>`
@@ -7517,8 +6641,6 @@ function loop() {
         document.getElementById(`curry-timer`).innerHTML = `<img src="img/items/friedFood.png"> ${returnHMS(saved.curry.time).replace("0h", "")}`
 
 
-
-
     }
 
     if (elapsed > 0.1) {
@@ -7538,10 +6660,6 @@ function loop() {
 }
 
 
-
-
-
-
 saved.arenaCard1 = undefined
 saved.arenaCard2 = undefined
 saved.arenaCard3 = undefined
@@ -7558,8 +6676,6 @@ saved.arenaCurrentTrainer = 1
 
 function pickArenaCard(number){
 
-
-
     document.getElementById(`arena-card-1`).className = `arena-card`
     document.getElementById(`arena-card-2`).className = `arena-card`
     document.getElementById(`arena-card-3`).className = `arena-card`
@@ -7569,19 +6685,7 @@ function pickArenaCard(number){
     saved.arenaActiveCard = number
 
 
-
-
-
-
-
-
-
-
-
-
 }
-
-
 
 function createArenaCards() {
 
@@ -7612,19 +6716,7 @@ function createArenaCards() {
     saved.arenaCard3 = [arrayPick(fieldt1,1), arrayPick(fieldt3,1), arrayPick(fieldt4,1)]
     if (rng(0.5)) saved.arenaCard3 = [...arrayPick(fieldt2,2), arrayPick(fieldt4,1)]
 
-
-
 }
-
-
-
-
-
-
-
-
-
-
 
 saved.weather = undefined
 saved.weatherTimer = 0
@@ -7687,8 +6779,6 @@ function updateWildBuffs(){
         document.getElementById("wild-buff-list").appendChild(div);
     }
 
-
-
 }
 
 
@@ -7718,8 +6808,6 @@ updateWildBuffs()
 
 }
 
-
-
 }
 
 function updateTeamBuffs(){
@@ -7740,12 +6828,6 @@ function updateTeamBuffs(){
         if (team[slot].buffs[i] === 0) continue
 
 
-
-
-
-
-
-
         if (testAbility(slot, ability.insomnia.id) && i == "sleep") team[slot].buffs.sleep = 0
         if (testAbility(slot, ability.immunity.id) && i == "poisoned") team[slot].buffs.poisoned = 0
         if (testAbility(slot, ability.limber.id) && i == "paralysis") team[slot].buffs.paralysis = 0
@@ -7755,8 +6837,6 @@ function updateTeamBuffs(){
 
         if (testAbility(slot, ability.hyperCutter.id ) && (i == "atkdown1" || i == "atkdown2" || i == "satkdown1" || i == "satkdown2")) {team[slot].buffs.atkdown1 = 0; team[slot].buffs.atkdown2 = 0; team[slot].buffs.satkdown1 = 0; team[slot].buffs.satkdown2 = 0; continue}
         if (testAbility(slot, ability.bigPecks.id ) && (i == "defdown1" || i == "defdown2" || i == "sdefdown1" || i == "sdefdown2")) {team[slot].buffs.defdown1 = 0; team[slot].buffs.defdown2 = 0; team[slot].buffs.sdefdown1 = 0; team[slot].buffs.sdefdown2 = 0; continue}
-
-
 
         if (testAbility(slot, ability.fullMetalBody.id) && /atkdown1|atkdown2|defdown1|defdown2|stakdown1|satkdown2|sdefdown1|sdefdown2|spedown1|spedown2/.test(i) ) team[slot].buffs[i] = 0
 
@@ -7769,8 +6849,6 @@ function updateTeamBuffs(){
     };
 
 }
-
-
 
 const tagBurn = `<span data-buff="burn"><span  style="color:white;cursor:help;padding: 0.1rem 0.7rem; border-radius: 0.2rem; font-size:1.1rem; width: auto; background: ${returnTypeColor("fire")}">Burn</span></span>`
 const tagFreeze = `<span data-buff="freeze"><span  style="color:white;cursor:help;padding: 0.1rem 0.7rem; border-radius: 0.2rem; font-size:1.1rem; width: auto; background: ${returnTypeColor("ice")}">Freeze</span></span>`
@@ -7826,8 +6904,6 @@ const wildBuffs = {
   spedown1: 0,
   spedown2: 0,
   embargo: 0,
-
-
 
 
 };
@@ -7918,8 +6994,6 @@ function moveBuff(target,buff,mod,turnOverride){
     if (shouldReturn) return
 
 
-
-
     if (target==="wild" && mod=="team") { //player to team
 
         if (team[exploreActiveMember].item == item.mentalHerb.id && /atkdown1|atkdown2|defdown1|defdown2|stakdown1|satkdown2|sdefdown1|sdefdown2|spedown1|spedown2|burn|freeze|confused|paralysis|poisoned|sleep/.test(buff) ) affectedTurns--
@@ -7939,10 +7013,6 @@ function moveBuff(target,buff,mod,turnOverride){
         if (testAbility(`active`, ability.spikyPelt.id ) && saved.weather == "electricTerrain" && saved.weatherTimer>0 && /burn|freeze|confused|paralysis|poisoned|sleep|defdown1|defdown2|atkdown1|atkdown2|sdefdown1|sdefdown2|satkdown1|satkdown2|spedown1|spedown2/.test(buff)) {return}
 
         if (saved.weatherTimer>0 && saved.weather=="safeguard" && saved.weatherTimer>0 && /burn|freeze|confused|paralysis|poisoned|sleep|defdown1|defdown2|atkdown1|atkdown2|sdefdown1|sdefdown2|satkdown1|satkdown2|spedown1|spedown2/.test(buff)) {return}
-
-
-
-
 
         for (const slot in team) {
 
@@ -7970,8 +7040,6 @@ function moveBuff(target,buff,mod,turnOverride){
              continue
         }
 
-
-
             team[slot].buffs[buff] = affectedTurns
         
         }
@@ -7992,8 +7060,6 @@ function moveBuff(target,buff,mod,turnOverride){
         for (const slot in team) {
         if (testAbility(slot, ability.imposter.id ) &&  /atkup1|atkup2|defup1|defup2|satkup1|satkup2|sdefup1|sdefup2|speup1|speup2/.test(buff)) team[slot].buffs[buff] = 3  ;
         }
-
-
 
         return
     } 
@@ -8031,12 +7097,6 @@ function moveBuff(target,buff,mod,turnOverride){
 
         if (/atkup1|atkup2|defup1|defup2|satkup1|satkup2|sdefup1|sdefup2|speup1|speup2/.test(buff)) {for (const slot in team) { if (testAbility(slot, ability.costar.id)) team[slot].buffs[buff] = affectedTurns }}
 
-
-
-
-
-
-
         if (testAbility(`active`, ability.contrary.id) && typeof buff === "string" && (buff.includes("down") || buff.includes("up")) ) {
         const inverse = buff.includes("down")
         ? buff.replace("down", "up")
@@ -8055,8 +7115,6 @@ function moveBuff(target,buff,mod,turnOverride){
         return
     } 
 
-
-    
 }
 
 saved.claimedExportReward = false
@@ -8165,8 +7223,6 @@ function changePkmnStarsign(){
 
     const id = currentEditedPkmn
 
-
-
     document.getElementById("tooltipTop").style.display = "none"
     document.getElementById("tooltipBottom").style.display = "none"
     document.getElementById("tooltipTitle").style.display = "none"
@@ -8219,31 +7275,17 @@ function changePkmnStarsign(){
     document.getElementById("pkmn-editor-sprite").style.filter = `hue-rotate(${starsign[pkmn[id].starsign].hue}deg)`
 
 
-
-
     if (saved.currentArea == undefined) updatePreviewTeam()
     updatePokedex()
 
-
-        
     closeTooltip()
 
     })
 
-
-
     }
 
 
-
-
-
-
-
-
 }
-
-
 
 function giveStarsign(id,mode){
     if (mode == "check"){
@@ -8260,8 +7302,6 @@ function giveStarsign(id,mode){
     pkmn[id].starsignList.push(randomStar)
     updateFamilyStarsign()
 }
-
-
 
 function updateFamilyStarsign() {
     // Track which families we've already processed to avoid duplicates
@@ -8308,10 +7348,6 @@ function updateFamilyStarsign() {
         }
     }
 }
-
-
-
-
 
 function exitPkmnTeam(){
 
@@ -8366,8 +7402,6 @@ let dexSampleSelect = undefined
 let geneticItemSelect = false
 
 
-
-
     document.getElementById("genetics-host-div").addEventListener("click", e => {
 
         if (saved.geneticOperation !== undefined) return
@@ -8400,8 +7434,6 @@ let geneticItemSelect = false
 
         if (saved.geneticOperation <= 1){
             
-            
-
 
         document.getElementById("tooltipTop").style.display = `none`
         document.getElementById("tooltipTitle").innerHTML = `Operation finished!<br>Do you want to use a genetic-aiding item?`
@@ -8436,8 +7468,6 @@ let geneticItemSelect = false
         
         `
 
-
-
         openTooltip()
 
 
@@ -8446,8 +7476,6 @@ let geneticItemSelect = false
 
         if (saved.geneticOperation != undefined){
             
-            
-
 
         document.getElementById("tooltipTop").style.display = `none`
         document.getElementById("tooltipTitle").innerHTML = `Are you sure you want to abort the operation?`
@@ -8472,8 +7500,6 @@ let geneticItemSelect = false
 
     })
 
-
-
 saved.lastDailyReset = undefined
 
 function resetDailyTimers() {
@@ -8487,8 +7513,6 @@ function resetDailyTimers() {
     }
 
 }
-
-
 
 saved.lastPokerusReset = undefined
 function assignPokerus(){
@@ -8550,8 +7574,6 @@ if (pkmn[saved.geneticSample].shiny) {document.getElementById("genetics-sample")
 document.getElementById("genetics-sample-div").innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024"><path fill="currentColor" d="M512 0C229.232 0 0 229.232 0 512c0 282.784 229.232 512 512 512c282.784 0 512-229.216 512-512C1024 229.232 794.784 0 512 0m0 961.008c-247.024 0-448-201.984-448-449.01c0-247.024 200.976-448 448-448s448 200.977 448 448s-200.976 449.01-448 449.01M736 480H544V288c0-17.664-14.336-32-32-32s-32 14.336-32 32v192H288c-17.664 0-32 14.336-32 32s14.336 32 32 32h192v192c0 17.664 14.336 32 32 32s32-14.336 32-32V544h192c17.664 0 32-14.336 32-32s-14.336-32-32-32"/></svg>`
 }
 
-
-
 if (saved.geneticHost!==undefined) {document.getElementById("genetics-host-div").dataset.pkmnEditor = saved.geneticHost} else {delete document.getElementById("genetics-host-div").dataset.pkmnEditor;}
 if (saved.geneticSample!==undefined) {document.getElementById("genetics-sample-div").dataset.pkmnEditor = saved.geneticSample} else {delete document.getElementById("genetics-host-div").dataset.pkmnEditor;}
 
@@ -8579,8 +7601,6 @@ if (sharedType === 2) compability = 3;
 if (samplePkmn.id === "ditto") compability++
 
 
-
-
 document.getElementById("pokerus-warning").style.display = "none"
 if (pkmn[saved.geneticHost].pokerus || saved.geneticPokerus==true) compability++
 if (pkmn[saved.geneticHost].pokerus || saved.geneticPokerus==true) document.getElementById("pokerus-warning").style.display = "flex"
@@ -8593,8 +7613,6 @@ const familySample = getEvolutionFamily(samplePkmn);
 if (familyHost.has(samplePkmn) || familySample.has(hostPkmn)) {
     compability = 4;
 }
-
-
 
 
 }
@@ -8625,8 +7643,6 @@ if (powerCost>=6) document.getElementById("genetics-warning").style.display = "f
 if (powerCost==6) document.getElementById("genetics-warning").innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path stroke-dasharray="28" d="M12 10l4 7h-8Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.4s" values="28;0"/></path><path d="M12 10l4 7h-8Z" opacity="0"><animate attributeName="d" begin="0.4s" dur="0.8s" keyTimes="0;0.25;1" repeatCount="indefinite" values="M12 10l4 7h-8Z;M12 4l9.25 16h-18.5Z;M12 4l9.25 16h-18.5Z"/><animate attributeName="opacity" begin="0.4s" dur="0.8s" keyTimes="0;0.1;0.75;1" repeatCount="indefinite" values="0;1;1;0"/></path></g></svg>Warning, high Power Cost! Only 5 out of 6 maximum IV's per stat will be inherited!`
 if (powerCost==7) document.getElementById("genetics-warning").innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path stroke-dasharray="28" d="M12 10l4 7h-8Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.4s" values="28;0"/></path><path d="M12 10l4 7h-8Z" opacity="0"><animate attributeName="d" begin="0.4s" dur="0.8s" keyTimes="0;0.25;1" repeatCount="indefinite" values="M12 10l4 7h-8Z;M12 4l9.25 16h-18.5Z;M12 4l9.25 16h-18.5Z"/><animate attributeName="opacity" begin="0.4s" dur="0.8s" keyTimes="0;0.1;0.75;1" repeatCount="indefinite" values="0;1;1;0"/></path></g></svg>Warning, very high Power Cost! Only 4 out of 6 maximum IV's per stat will be inherited!`
 if (powerCost==8) document.getElementById("genetics-warning").innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path stroke-dasharray="28" d="M12 10l4 7h-8Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.4s" values="28;0"/></path><path d="M12 10l4 7h-8Z" opacity="0"><animate attributeName="d" begin="0.4s" dur="0.8s" keyTimes="0;0.25;1" repeatCount="indefinite" values="M12 10l4 7h-8Z;M12 4l9.25 16h-18.5Z;M12 4l9.25 16h-18.5Z"/><animate attributeName="opacity" begin="0.4s" dur="0.8s" keyTimes="0;0.1;0.75;1" repeatCount="indefinite" values="0;1;1;0"/></path></g></svg>Warning, extreme Power Cost! Only 3 out of 6 maximum IV's per stat will be inherited!`
-
-
 
 document.getElementById("special-warning").style.display = "none"
 if (pkmn[saved.geneticHost]?.hidden) document.getElementById("special-warning").style.display = "flex"
@@ -8808,8 +7824,6 @@ if (mod==="end"){
 
     pkmn[saved.geneticHost].dictionaryTagIvSum = pkmn[saved.geneticHost].ivs.hp + pkmn[saved.geneticHost].ivs.atk + pkmn[saved.geneticHost].ivs.satk + pkmn[saved.geneticHost].ivs.spe + pkmn[saved.geneticHost].ivs.sdef + pkmn[saved.geneticHost].ivs.def
 
-
-
     for (const iv in pkmn[saved.geneticHost].ivs){
         const ivId = pkmn[saved.geneticHost].ivs[iv]
         //let maxIv = 3
@@ -8851,11 +7865,7 @@ if (mod==="end"){
 
 }
 
-
-
 }
-
-
 
 
 setInterval(() => {
@@ -8872,12 +7882,6 @@ setInterval(() => {
     document.getElementById("genetics-progress-time").innerHTML = returnHMS(saved.geneticOperation)
     document.getElementById("genetics-progress-bar").style.width = `${100 - (saved.geneticOperation / saved.geneticOperationTotal) * 100}%`;
 }, 1000);
-
-
-
-
-
-
 
 let dexTrainSelect = undefined
 
@@ -8927,8 +7931,6 @@ training.level = {
         givePkmn(pkmn[ pkmn[saved.trainingPokemon].evolve()[1].pkmn.id ],1)
         } 
         }
-
-
 
         setTimeout(() => {
         const div = document.createElement("span");
@@ -9205,10 +8207,6 @@ training.nature = {
 
 function setTrainingMenu() {
 
-
-
-
-
     if (saved.trainingPokemon != undefined) {
         document.getElementById("training-sprite-div").innerHTML = `<img class="sprite-trim" style="z-index: 1; transform-origin: bottom; margin-top: auto; position: absolute; bottom: 0rem;" id="training-host" src="img/pkmn/sprite/${saved.trainingPokemon}.png">`
         if (pkmn[saved.trainingPokemon].shiny) {document.getElementById("training-host").src = `img/pkmn/shiny/${saved.trainingPokemon}.png`;}
@@ -9221,8 +8219,6 @@ function setTrainingMenu() {
         document.getElementById("training-sprite-div").innerHTML = `<svg style="color:white; scale:2; opacity:0.8; margin-bottom:-2rem;" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48"><defs><mask id="SVGjidSMeWm"><g fill="none" stroke="#fff" stroke-linejoin="round" stroke-width="4"><path fill="#555555" d="M24 44c11.046 0 20-8.954 20-20S35.046 4 24 4S4 12.954 4 24s8.954 20 20 20Z"/><path stroke-linecap="round" d="M24 16v16m-8-8h16"/></g></mask></defs><path fill="currentColor" d="M0 0h48v48H0z" mask="url(#SVGjidSMeWm)"/></svg>`
         voidAnimation("training-sack", "none")
     }
-
-
 
 
     if (saved.trainingPokemon!==undefined) {document.getElementById("training-sprite-div").dataset.pkmnEditor = saved.trainingPokemon} else {delete document.getElementById("training-sprite-div").dataset.pkmnEditor;}
@@ -9261,8 +8257,6 @@ function setTrainingMenu() {
     document.getElementById("training-list").appendChild(div);
 
 
-
-
     div.addEventListener("click", e => { 
 
 
@@ -9274,10 +8268,6 @@ function setTrainingMenu() {
         openTooltip()
         return
     }
-
-
-
-
 
         let restrictedError = false
         let restricedActive = 0
@@ -9301,10 +8291,6 @@ function setTrainingMenu() {
         openTooltip()
         return
     }
-
-
-
-
 
 
         if (training[i].condition && training[i].condition()!=true) return
@@ -9340,27 +8326,11 @@ function setTrainingMenu() {
         
     }
 
-
-
-
-
-
-
 }
 
 setTrainingMenu()
 
-
-
-
-
-
-
-
-
 function battleSummary() {
-
-
 
     document.getElementById("tooltipTop").style.display = `none`
     document.getElementById("tooltipTitle").innerHTML = `Damage Dealt`
@@ -9400,27 +8370,7 @@ for (const item of indexedTeam){
     openTooltip()
 
 
-
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 function returnHMS(seconds) {
   const h = (seconds / 3600) | 0;
@@ -9452,8 +8402,6 @@ function returnHMS(seconds) {
 
     return family;
 }*/
-
-
 
 function getEvolutionFamily(base) {
     const family = new Set();
@@ -9500,19 +8448,11 @@ function getEvolutionFamily(base) {
     return family;
 }
 
-
-
-
-
-
-
 function returnHighestStat(pokemon) { //ignores hp bst, used for beast boost etc
     return Object.keys(pokemon.bst)
         .filter(stat => stat !== "hp")
         .reduce((a, b) => pokemon.bst[a] > pokemon.bst[b] ? a : b);
 }
-
-
 
 function debugSetIvs(number){
     for (const i in pkmn){
@@ -9539,8 +8479,6 @@ function debugGetItems(){
         item[i].got = 999
     }
 }
-
-
 
 function testAbility(target,id){
 
@@ -9654,11 +8592,7 @@ function returnDivisionStars(target, stat){
     if (division == "S") return 5 + bonus
     if (division == "SS" || division == "SSS") return 6 + bonus*/
 
-
-
 }
-
-
 
 function claimWonderTrade(){
 
@@ -9772,10 +8706,6 @@ function claimMysteryGift(){
 }
 
 
-
-
-
-
 setInterval(() => {
     pkmnWalk()
 }, 500);
@@ -9785,22 +8715,10 @@ function pkmnWalkCandidates(){
 for (const i in pkmn) if (pkmn[i].caught>0) walkingPkmn.push(i)
 }
 
-
-
 function pkmnWalk(){
 
 
-
-
     if (saved.currentArea!==undefined) return
-
-
-
-
-
-
-
-
 
 
     if (walkingPkmn.length<5 && rng(0.9)) return
@@ -9818,8 +8736,6 @@ function pkmnWalk(){
 
     if (rng(0.5)) div.style.scale = `-1 1`
 
-
-    
     pickedPkmn = arrayPick(walkingPkmn)
 
 
@@ -9848,8 +8764,6 @@ function pkmnWalk(){
     div.style.zIndex = position-100
     const scale = random(0.5,1.5)
 
-
-
     div.innerHTML = `
     <img src="img/pkmn/${shiny}/${pickedPkmn}.png"
     style="
@@ -9874,15 +8788,11 @@ function pkmnWalk(){
 
     }
 
-
-
     document.getElementById(`main-content`).appendChild(div)
 
     setTimeout(() => {
     div.remove()
     }, duration*1000);
-
-
 
 
 }
@@ -9924,19 +8834,13 @@ function arceusCheck(){
 
 }
 
-
-
 function seasonalSwitch(){
-
-
 
     //document.getElementById("tooltipTop").innerHTML = `<img src="img/pkmn/shiny/${mysteryGift.icon}.png">`
     document.getElementById("tooltipTitle").innerHTML = `Select an event`
     document.getElementById("tooltipMid").innerHTML = `Select the seasonal event to start. It will last for the 10 following days, and will get replaced by currently-ongoing ones. However, the seasonal shop of that event wont open`
     document.getElementById("tooltipBottom").innerHTML = `<div id="seasonal-pick-listing"></div>`
     openTooltip()
-
-
 
     for (const i in season){
 
@@ -9951,8 +8855,6 @@ function seasonalSwitch(){
         `
 
         document.getElementById(`seasonal-pick-listing`).appendChild(div)
-
-
 
         div.addEventListener("click", e => { 
 
@@ -9975,33 +8877,13 @@ function seasonalSwitch(){
         seasonCheck()
         changeTheme()
 
-
-
         })
 
 
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     
 }
-
-
 
 function seasonCheck() {
 
@@ -10038,10 +8920,6 @@ function seasonCheck() {
     }
 
 
-
-
-
-
     //temporal season check, for festive tickets
     if (saved.temporalSeason) {
         const endDate = saved.temporalSeason.end.month * 100 + saved.temporalSeason.end.day;
@@ -10055,18 +8933,6 @@ function seasonCheck() {
         }
     }
 
-
-
-
-
-
-
-
-
-
-
-
-    
     saved.currentSeason = matchedSeason;
     
     if (newSeason) { //executes once per season, resets shop
@@ -10092,12 +8958,6 @@ function seasonCheck() {
     }
     
 }
-
-
-
-
-
-
 
 
 function renamePokemon(){
@@ -10138,21 +8998,9 @@ function renamePokemon(){
     openTooltip()
 }
 
-
-
-
-
-
-
-
-
-
-
 saved.lastDimensionRotation = 1
 
 function assignMegaDimension(){
-
-
 
     for (const i in areas){
         if (areas[i].type != "dimensionBlueprint") continue
@@ -10170,8 +9018,6 @@ function assignMegaDimension(){
 
     }
 
-
-
     if (saved.lastDimensionRotation == rotationEventCurrent) return
     if (saved.lastDimensionRotation != rotationEventCurrent) { saved.lastDimensionRotation = rotationEventCurrent }
 
@@ -10185,8 +9031,6 @@ function assignMegaDimension(){
                       'fighting', 'poison', 'ground', 'flying', 'psychic', 
                       'bug', 'rock', 'ghost', 'dragon', 'dark', 'steel', 'fairy'];
 
-
-    
     areas.dimensionRift1.spawns = {
         common : [pkmn[randomDivisionPkmn("S",arrayPick(allTypes))], pkmn[randomDivisionPkmn("S",arrayPick(allTypes))], pkmn[randomDivisionPkmn("S",arrayPick(allTypes))]],
     }
@@ -10204,34 +9048,12 @@ function assignMegaDimension(){
     }
 
 
-
-
-
-
     //}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 }
 
-
-
 function updateMegaDimension(tier){
-
-
 
     assignMegaDimension()
 
@@ -10242,8 +9064,6 @@ function updateMegaDimension(tier){
 
 
     if (tier==undefined) {
-
-
 
     document.getElementById("dimension-menu-header").innerHTML = `
 
@@ -10271,8 +9091,6 @@ function updateMegaDimension(tier){
     <span id="dimension-portal-wrapper" ></span>
     `
 
-
-
     for (const i in areas){
         if (areas[i].type != "dimensionBlueprint") continue
         if (areas[i].rotation != rotationDimensionCurrent) continue 
@@ -10299,47 +9117,19 @@ function updateMegaDimension(tier){
 
         document.getElementById("dimension-portal-wrapper").appendChild(div);
 
-
-
         div.addEventListener("click", e => { 
 
             updateMegaDimension(areas[i].tier)
 
-
-
         })
 
-
-
-
-
-
-
-
-
-
-
     }
-
-
-
-
-
-
-
-
-
-
 
 
     } else { // update the areas on themselves
 
 
     document.getElementById("dimension-listing").innerHTML = ""
-
-
-
-
 
 
         for (const i in areas){
@@ -10391,15 +9181,9 @@ function updateMegaDimension(tier){
     Go Back
     </div>`
 
-
-
-
-
     for (const i in areas){
         if (areas[i].type != "dimension") continue
         if (areas[i].tier != tier) continue
-
-
 
 
         const divAreas = document.createElement("div");
@@ -10416,10 +9200,6 @@ function updateMegaDimension(tier){
        <span>${areas[i].unlockDescription}</span>
        </span>`
 
-
-
-
-
         divAreas.innerHTML = `
                 ${unlockRequirement}
                 <span class="hitbox"></span>
@@ -10435,8 +9215,6 @@ function updateMegaDimension(tier){
                     <img class="explore-ticket-sprite sprite-trim" style="z-index: 10;" src="img/pkmn/sprite/${areas[i].icon.id}.png">
                 </div>
         `;
-
-    
 
 
         document.getElementById("dimension-listing").appendChild(divAreas);
@@ -10457,38 +9235,14 @@ function updateMegaDimension(tier){
         })
         }
 
-
-        
     }
 
 
-
-
-
-
-
-
-
-
     }
-
-
-
-
-
-
-
-
 
 }
 
-
-
 updateMegaDimension()
-
-
-
-
 
 
 window.addEventListener('beforeunload', function(event) {
@@ -10501,19 +9255,7 @@ window.addEventListener('beforeunload', function(event) {
 
 });
 
-
-
-
-
-
-
-
-
 window.addEventListener('load', function() {
-
-
-    
-
 
     loadGame();
     getSeed();

@@ -1,8 +1,6 @@
 
 
 
-
-
 * {
     margin: 0;
     padding: 0;
@@ -122,8 +120,6 @@ body {
     animation: bg-horizontal 600s linear infinite reverse;
 }
 
-
-
 #main-content{
     width: 50%;
     height: 100%;
@@ -172,8 +168,6 @@ body {
         width: 100%;
     }
 }
-
-
 
 #explore-header{
     height: auto;
@@ -262,8 +256,6 @@ body {
     flex-shrink: 0;
     white-space: nowrap;
 }
-
-
 
 
 .explore-hp{
@@ -472,8 +464,6 @@ flex-direction: column;
     scale: 0.5;
 }
 
-
-
 @media (max-width: 1000px) {
 
 .member-inactive .sprite-box{
@@ -486,8 +476,6 @@ flex-direction: column;
 }
 
 }
-
-
 
 .member-inactive{
     height: 4rem;
@@ -517,8 +505,6 @@ flex-direction: column;
     font-weight: 100;
     color: var(--light2);
 }
-
-
 
 
 #explore-drops{
@@ -836,16 +822,12 @@ border: 1px solid rgba(255, 255, 255, 0.3);
     flex-direction: column;
 }
 
-
-
 .pkmn-stats-panel{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
-
-
 
 .pkmn-stats-panel-bst svg{
     color: var(--dark2);
@@ -872,8 +854,6 @@ border: 1px solid rgba(255, 255, 255, 0.3);
     align-items: center;
     text-align: center;
 }
-
-
 
 .inspect-pkmn-types div{
     background: transparent !important;
@@ -1082,8 +1062,6 @@ border: 1px solid rgba(255, 255, 255, 0.3);
     scale: 0.9;
 }
 
-
-
 .separator-solid{
     height: 0.2rem;
     width: 15rem;
@@ -1095,8 +1073,6 @@ border: 1px solid rgba(255, 255, 255, 0.3);
     margin-bottom: 0.5rem;
     border-radius: 1rem;
 }
-
-
 
 
 #pkmn-editor {
@@ -1284,8 +1260,6 @@ border: 1px solid rgba(255, 255, 255, 0.3);
     height: 100%;
 }
 
-
-
 #pkmn-editor-side-content{
     background-image: url(img/bg/mini/forest.png);
     padding: 0.3rem;
@@ -1297,10 +1271,6 @@ border: 1px solid rgba(255, 255, 255, 0.3);
     image-rendering: pixelated;
     background-size: cover;
 }
-
-
-
-
 
 #pkmn-edit-buttons{
     display: flex;
@@ -1606,8 +1576,6 @@ border: 1px solid rgba(255, 255, 255, 0.3);
     background: var(--light1);
 }
 
-
-
 .area-end-container div img{
     position: absolute;
     image-rendering: pixelated;
@@ -1675,15 +1643,11 @@ border: 1px solid rgba(255, 255, 255, 0.3);
     100%{opacity: 0;}
 }
 
-
-
 @media (max-width: 1000px) {
     #white-transition {
         width: 100%;
     }
 }
-
-
 
 .season-background-halloween {
     background: 
@@ -1694,8 +1658,6 @@ border: 1px solid rgba(255, 255, 255, 0.3);
     ;
     background-size: 50px !important;
 }
-
-
 
 #explore-menu {
     position: fixed;
@@ -1751,8 +1713,6 @@ border: 1px solid rgba(255, 255, 255, 0.3);
     position: absolute;
     z-index: 100;
 }
-
-
 
 
 .explore-ticket{
@@ -1818,8 +1778,6 @@ border: 1px solid rgba(255, 255, 255, 0.3);
 .explore-ticket:active{
     scale: 0.98;
 }
-
-
 
 
 .explore-ticket div{
@@ -1892,8 +1850,6 @@ border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 
-
-
 .explore-ticket-right {
     display: flex;
     justify-content: center !important;
@@ -1955,10 +1911,6 @@ border: 1px solid rgba(255, 255, 255, 0.3);
 
 
 }
-
-
-
-
 
 #explore-menu-header span {
     height: 2rem;
@@ -2024,8 +1976,6 @@ border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 
-
-
 .explore-menu-selector div:hover {
     background: var(--dark1);
 }
@@ -2040,8 +1990,6 @@ transform: rotate(90deg);
 color: var(--dark2);
 z-index: 1;
 }
-
-
 
 .vs-card{
     height: 6rem;
@@ -2085,6 +2033,66 @@ transform: rotate(90deg);
 color: rgb(190, 71, 62);
 z-index: 0;
 }
+
+.route-progress-ball{
+    position: absolute;
+    width: 1.35rem;
+    height: 1.35rem;
+    right: 1.8rem;
+    bottom: 0.05rem;
+    z-index: 1;
+    box-sizing: border-box;
+    border: 2px solid #262626;
+    border-radius: 50%;
+    background: linear-gradient(to bottom, #e84545 0 44%, #262626 44% 56%, #f4f4f4 56%);
+}
+
+.route-progress-ball::after{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0.38rem;
+    height: 0.38rem;
+    content: "";
+    transform: translate(-50%, -50%);
+    border: 2px solid #262626;
+    border-radius: 50%;
+    background: #f4f4f4;
+}
+
+.route-progress-ball.is-incomplete{ filter: grayscale(1); opacity: 0.45; }
+.route-progress-ball.is-shiny{ background: linear-gradient(to bottom, #e8c839 0 44%, #262626 44% 56%, #f4f4f4 56%); }
+
+.item-level-0 img{ filter: grayscale(1) brightness(0.65); }
+.item-level-2 img{ filter: drop-shadow(0 0 2px #39c56a); }
+.item-level-3 img{ filter: drop-shadow(0 0 2px #3d9bea); }
+.item-level-4 img{ filter: drop-shadow(0 0 2px #ae66dc); }
+.item-level-5 img{ filter: drop-shadow(0 0 2px #e4b52e) drop-shadow(0 0 4px #e4b52e); }
+
+.item-level-0::after,
+.item-level-1::after,
+.item-level-2::after,
+.item-level-3::after,
+.item-level-4::after,
+.item-level-5::after{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 2;
+    padding: 0.05rem 0.2rem;
+    content: "Lv. " attr(data-item-level);
+    border-radius: 0.35rem;
+    color: white;
+    background: #333b;
+    font-size: 0.62rem;
+    line-height: 1;
+    pointer-events: none;
+}
+
+.item-level-2::after{ background: #278446dd; }
+.item-level-3::after{ background: #2874b5dd; }
+.item-level-4::after{ background: #7b399bdd; }
+.item-level-5::after{ background: #a77812ee; }
 
 .vs-card-flair {
 
@@ -2161,8 +2169,6 @@ z-index: 0;
     position: relative;
 }
 
-
-
 .area-preview span{
     position: absolute;
     top: -0.5rem;
@@ -2220,8 +2226,6 @@ z-index: 0;
     filter: brightness(0);
     cursor: default;
 }
-
-
 
 #explore-transition {
     position: fixed;
@@ -2282,8 +2286,6 @@ z-index: 0;
         width: 100%;
     }
 }
-
-
 
 
 #pokedex-list{
@@ -2362,8 +2364,6 @@ z-index: 0;
     animation: pkmn-active 0.5s infinite;
 }
 
-
-
 #pokedex-filters{
     height: auto;
     width: 100%;
@@ -2437,8 +2437,6 @@ z-index: 0;
     color: white;
 }
 
-
-
 #pokedex-total{
     position: absolute;
     right: 0;
@@ -2483,8 +2481,6 @@ z-index: 0;
     cursor: pointer;
     transition: opacity 0.3s ease;
 }
-
-
 
 .pokedex-menu-flair {
     position: fixed;
@@ -2537,8 +2533,6 @@ z-index: 0;
     }
 }
 
-
-
 #item-menu-list{
     width: 100%;
     height: 100%;
@@ -2566,6 +2560,7 @@ z-index: 0;
     transition: 0.1s;
     flex-shrink: 0;
     overflow: hidden;
+    position: relative;
 }
 
 .item-list-name{
@@ -2629,8 +2624,6 @@ z-index: 0;
     flex-wrap: wrap;
     flex-shrink: 0;
 }
-
-
 
 
 .item-menu-tags div{
@@ -3435,8 +3428,6 @@ background:
     z-index: 2;
 }
 
-
-
 #guide-menu{
     position: fixed;
     height: 100%;
@@ -3463,8 +3454,6 @@ background:
         width: 100%;
     }
 }
-
-
 
 #guide-menu-header{
     height: 6.5rem;
@@ -3632,8 +3621,6 @@ background:
 }
 
 
-
-
 #pkmn-edit-division{
     background: var(--dark1);
     width: 100%;
@@ -3675,8 +3662,6 @@ background:
     paint-order: stroke fill;
     text-shadow: rgba(0, 0, 0, 0.5) 2px 3px 5px;
 }
-
-
 
 .tier-letter-s{
 
@@ -3908,10 +3893,6 @@ background:
     padding: 0 0.4rem;
     color: var(--dark1);
 }
-
-
-
-
 
 #genetics-host-div, #genetics-sample-div{
     cursor: help;
@@ -4433,15 +4414,7 @@ background:
     overflow: hidden;
 }
 
-
-
 #event-banner{
-
-
-
-
-
-
 
     background-image: url(img/bg/event/kanto.png);
     height: 8rem;
@@ -4457,10 +4430,6 @@ background:
     border: rgba(255, 255, 255, 0.7) double 4px;
     margin-top: 0.5rem;
 }
-
-
-
-
 
 
 #event-banner span{
@@ -4488,8 +4457,6 @@ background:
         font-size: 2rem;
     }
 }
-
-
 
 #training-menu{
     position: fixed;
@@ -4782,8 +4749,6 @@ background:
 }
 
 
-
-
 #dictionary-menu{
     position: fixed;
     height: 100%;
@@ -4856,8 +4821,6 @@ background:
     scale: 1;
 }
 
-
-
 #dictionary-list div:hover{
     background: var(--dark2);
 }
@@ -4865,8 +4828,6 @@ background:
 #dictionary-list div:active{
     scale: 0.9;
 }
-
-
 
 .dictionary-overview-data{
     display: flex;
@@ -4956,8 +4917,6 @@ background:
 }
 
 
-
-
 #team-preview .explore-team-member {
     cursor: move !important;
     transition: opacity 0.2s;
@@ -5023,8 +4982,6 @@ transform: translateY(-1rem);
 }
 
 
-
-
 .auto-build-confirm,
 .duplicate-build-confirm{
     border-radius: 0.2rem;
@@ -5055,8 +5012,6 @@ transform: translateY(-1rem);
     font-size: 1rem;
 }
 
-
-
 #tooltipActions{
     width: 100%;
     display: flex;
@@ -5064,8 +5019,6 @@ transform: translateY(-1rem);
     align-items: center;
     flex-shrink: 0;
 }
-
-
 
 
 #custom-challenges-menu{
@@ -5089,8 +5042,6 @@ transform: translateY(-1rem);
         width: 100%;
     }
 }
-
-
 
 #custom-challenges-header{
     height: 6.5rem;
@@ -5416,10 +5367,6 @@ transform: translateY(-1rem);
     word-wrap: break-word;
 }
 
-
-
-
-
 .pkmn-walk{
     width: 100%;
     background: rgba(0, 0, 0, 0);
@@ -5647,10 +5594,6 @@ transform: translateY(-1rem);
 }
 
 
-
-
-
-
 .arena-card{
 
 
@@ -5737,8 +5680,6 @@ transform: translateY(-1rem);
     color: white;
     opacity: 0.5;
 
-
-
  }
 
 
@@ -5821,8 +5762,6 @@ transform: translateY(-1rem);
     background: var(--light1);
 }
 
-
-
 #tooltip-modifiers-list div{
     width: 100%;
     border-radius: 3px;
@@ -5892,10 +5831,6 @@ transform: translateY(-1rem);
     transform: translateX(100%);
   }
 }
-
-
-
-
 
 #decor-menu{
     position: fixed;
@@ -5979,8 +5914,6 @@ transform: translateY(-1rem);
     height: 11rem;
     width: 11rem;
 }
-
-
 
 .decor-buttons{
     width: 20rem;
@@ -6077,12 +6010,6 @@ transform: translateY(-1rem);
 }
 
 
-
-
-
-
-
-
 #dimension-menu{
     position: fixed;
     height: 100%;
@@ -6120,8 +6047,6 @@ transform: translateY(-1rem);
     0%,100%{opacity: 1;}
     50%{opacity: 0;}
 }
-
-
 
 @media (max-width: 1000px) {
     #dimension-menu {
@@ -6192,8 +6117,6 @@ transform: translateY(-1rem);
     transition: 0.1s;
 }
 
-
-
 .dimension-sprite{
     animation: pkmn-active 1.5s infinite;
     image-rendering: pixelated;
@@ -6248,8 +6171,6 @@ transform: translateY(-1rem);
     margin: -1rem;
 }
 }
-
-
 
 #dimension-listing{
     height: 100%;
@@ -6334,8 +6255,6 @@ transform: translateY(-1rem);
     justify-content: center;
     align-items: center;
 }
-
-
 
 .season-pick{
     background: 
@@ -6476,8 +6395,6 @@ transform: translateY(-1rem);
     
 }
 
-
-
 #curry-buttons{
     display: flex;
     justify-content: space-between;
@@ -6528,8 +6445,6 @@ transform: translateY(-1rem);
     pointer-events: none;
 }
 
-
-
 #starsign-list{
     height: 100%;
     width: 100%;
@@ -6569,8 +6484,6 @@ transform: translateY(-1rem);
     image-rendering: pixelated;
 }
 
-
-
 .tag-button{
     display: flex;
     justify-content: center;
@@ -6585,16 +6498,6 @@ transform: translateY(-1rem);
     width: 2rem;
     margin-right: 0.5rem;
 }
-
-
-
-
-
-
-
-
-
-
 
 
         .tag-system-container {
